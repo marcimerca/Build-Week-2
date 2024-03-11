@@ -1,0 +1,20 @@
+/* Personalizzazione della navbar */
+.vertical-navbar {
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+  
+  /* Stile degli elementi della navbar */
+  .vertical-navbar .nav-link {
+    color: #fff; /* Colore del testo */
+  }
+  
+  /* Stile delle icone nella navbar */
+  .vertical-navbar .nav-link i {
+    font-size: 30px; /* Dimensione delle icone */
+  }
+
+  .linkhover:hover {
+    cursor: pointer;
+}
