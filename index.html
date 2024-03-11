@@ -18,15 +18,14 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <!-- <link rel="stylesheet" href="assets/css/circular-font.css"> -->
     <link href="assets/css/style.css" rel="stylesheet" />
   </head>
 
-  <!--Main-->
+  <!--NavBar-->
 
   <body class="bg-black">
     <div class="container">
-      <div class="row">
+      <div class="row d-flex">
         <nav
           class="navbar-vertical vertical-navbar m-2 rounded position-fixed col-3"
         >
@@ -71,34 +70,41 @@
                 <span class="badge bg-secondary rounded-4 fs-6 py-2 fw-"
                   >Playlist</span
                 >
-                <span class="badge bg-secondary rounded-4 py-2 fs-6">Artisti</span>
-                <span class="badge bg-secondary rounded-4 py-2 fs-6">Album</span>
+                <span class="badge bg-secondary rounded-4 py-2 fs-6"
+                  >Artisti</span
+                >
+                <span class="badge bg-secondary rounded-4 py-2 fs-6"
+                  >Album</span
+                >
               </div>
-              <div class="text-white ms-4 mt-2 mb-2 d-flex mx-3 justify-content-between">
+              <div
+                class="text-white ms-4 mt-2 mb-2 d-flex mx-3 justify-content-between"
+              >
                 <i class="bi bi-search fs-4"></i>
                 <div class="dropdown">
-                    <i class="bi bi-list-ul"></i>
-                  <button
-                  
-                    class="btn bg-transparent border-0 btn-secondary dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Recenti
-                  </button>
-                  <ul class="dropdown-menu bg-dark ">
-                    <li><a class="text-white hoverDropdown dropdown-item" href="#">Recenti</a></li>
-                    <li>
-                      <a class="text-white hoverDropdown dropdown-item" href="#">Aggiunti di recente</a>
-                    </li>
-                    <li>
-                      <a class="text-white hoverDropdown dropdown-item" href="#">Ordine alfabetico</a>
-                    </li>
-                    <li>
-                        <a class="text-white hoverDropdown dropdown-item" href="#">Autore</a>
-                      </li>
-                  </ul>
+                    <button
+                        class="btn bg-transparent border-0 btn-secondary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i class="bi bi-list-ul"></i>
+                        Recenti
+                    </button>
+                    <ul class="dropdown-menu bg-dark">
+                        <li>
+                            <a class="text-white hoverDropdown dropdown-item" href="#">Recenti</a>
+                        </li>
+                        <li>
+                            <a class="text-white hoverDropdown dropdown-item" href="#">Aggiunti di recente</a>
+                        </li>
+                        <li>
+                            <a class="text-white hoverDropdown dropdown-item" href="#">Ordine alfabetico</a>
+                        </li>
+                        <li>
+                            <a class="text-white hoverDropdown dropdown-item" href="#">Autore</a>
+                        </li>
+                    </ul>
                 </div>
               </div>
             </div>
@@ -106,6 +112,11 @@
         </nav>
       </div>
     </div>
+    <div class="container">
+    <div id="canzoni"></div>
+    </div>
+
+    <!--Main-->
 
     <!--Footer-->
 
@@ -162,5 +173,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="assets/js/homepage.js"></script>
   </body>
 </html>

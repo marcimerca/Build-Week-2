@@ -1,9 +1,9 @@
-/* body{
-  font-family: "Circular";
-  font-weight: 400;
-} */
+ body{
+    display: flex;
+    flex-direction: row;
+} 
 
-/* Personalizzazione della navbar */
+ /*Personalizzazione della navbar */
 .vertical-navbar {
     top: 0;
     left: 0;
