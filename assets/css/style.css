@@ -1,3 +1,8 @@
+/* body{
+  font-family: "Circular";
+  font-weight: 400;
+} */
+
 /* Personalizzazione della navbar */
 .vertical-navbar {
     top: 0;
@@ -17,4 +22,11 @@
 
   .linkhover:hover {
     cursor: pointer;
+
+  
+}
+
+.hoverDropdown:hover{
+  background-color: grey;
+  opacity: 0.9;
 }
