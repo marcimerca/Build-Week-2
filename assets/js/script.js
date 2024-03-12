@@ -61,18 +61,21 @@ function displayAlbumCard(albumsObjectsArray, destinationDiv) {
     albumsObjectsArray.forEach((albumsObject) => {
         const cardDiv = document.createElement("div");
         cardDiv.innerHTML = `<div class="me-3 rounded-2 p-3 h-100 cardhover">
-            <div class="card bg-transparent border-0" style="width: 12rem">
+            <div class="card position-relative bg-transparent border-0" style="width: 12rem">
                 <img src="${albumsObject.cover_xl}" class="card-img-top" alt="..." />
+                <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
                 <div class="card-body">
                     <h5 class="text-white">${albumsObject.title}</h5>
                     <p class="card-text text-white">
                         ${albumsObject.artist.name}
                     </p>
+                    
                 </div>
             </div>
         </div>`;
 
-        cardDiv.addEventListener('click', () => playAlbum(albumsObject));
+        const btnPlay = cardDiv.querySelector(".btnPlay");
+        btnPlay.addEventListener('click', () => playAlbum(albumsObject));
         destinationDiv.appendChild(cardDiv);
     });
 }
