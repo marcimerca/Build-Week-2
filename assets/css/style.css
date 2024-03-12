@@ -12,6 +12,7 @@
 
 body {
   box-sizing: border-box;
+  overflow: hidden;
 }
 .bg-color-grey {
   background-color: #121212;
