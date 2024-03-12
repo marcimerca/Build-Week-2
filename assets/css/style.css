@@ -1,32 +1,34 @@
- body{
-    display: flex;
-    flex-direction: row;
-} 
-
- /*Personalizzazione della navbar */
-.vertical-navbar {
-    top: 0;
-    left: 0;
-    bottom: 0;
-  }
-  
-  /* Stile degli elementi della navbar */
-  .vertical-navbar .nav-link {
-    color: #fff; /* Colore del testo */
-  }
-  
-  /* Stile delle icone nella navbar */
-  .vertical-navbar .nav-link i {
-    font-size: 30px; /* Dimensione delle icone */
-  }
-
-  .linkhover:hover {
-    cursor: pointer;
-
-  
+body {
+  display: flex;
+  flex-direction: row;
 }
 
-.hoverDropdown:hover{
+/*Personalizzazione della navbar */
+.vertical-navbar {
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+/* Stile degli elementi della navbar */
+.vertical-navbar .nav-link {
+  color: #fff; /* Colore del testo */
+}
+
+/* Stile delle icone nella navbar */
+.vertical-navbar .nav-link i {
+  font-size: 30px; /* Dimensione delle icone */
+}
+
+.linkhover:hover {
+  cursor: pointer;
+}
+
+.hoverDropdown:hover {
   background-color: grey;
   opacity: 0.9;
+}
+
+.card-title {
+  font-size: 12px !important;
 }
