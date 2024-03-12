@@ -9,49 +9,51 @@
     left: 0;
     bottom: 0;
   } */
-  
-.bg-color-grey{
+
+body {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.bg-color-grey {
   background-color: #121212;
 }
 
-.bg-color-buttons-grey{
-  background-color: #2A2A2A;
+.bg-color-buttons-grey {
+  background-color: #2a2a2a;
 }
 
-.bg-color-buttons-grey:hover{
+.bg-color-buttons-grey:hover {
   background-color: #353434;
 }
 
-  /* Stile degli elementi della navbar */
-  .vertical-navbar .nav-link {
-    color: #fff; /* Colore del testo */
-  }
-  
-  /* Stile delle icone nella navbar */
-  .vertical-navbar .nav-link i {
-    font-size: 30px; /* Dimensione delle icone */
-  }
-
-  .linkhover:hover {
-    cursor: pointer;
-    opacity: 1;
-    color: white;
-
-  
+/* Stile degli elementi della navbar */
+.vertical-navbar .nav-link {
+  color: #fff; /* Colore del testo */
 }
-.linkhover{
+
+/* Stile delle icone nella navbar */
+.vertical-navbar .nav-link i {
+  font-size: 30px; /* Dimensione delle icone */
+}
+
+.linkhover:hover {
+  cursor: pointer;
+  opacity: 1;
+  color: white;
+}
+.linkhover {
   opacity: 0.8;
 }
 
-.cardhover{
+.cardhover {
   background-color: #181717;
 }
 
-.cardhover:hover{
+.cardhover:hover {
   background-color: #292727;
 }
 
-.hoverDropdown:hover{
+.hoverDropdown:hover {
   background-color: grey;
   opacity: 0.9;
 }
