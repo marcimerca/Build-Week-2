@@ -9,13 +9,9 @@
     left: 0;
     bottom: 0;
   } */
-  .carde {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    
-  }
   
+
+
   body {
     box-sizing: border-box;
     overflow: hidden;
