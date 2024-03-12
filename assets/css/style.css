@@ -3,13 +3,25 @@
     flex-direction: row;
 } 
 
- /*Personalizzazione della navbar */
-.vertical-navbar {
+/* Personalizzazione della navbar */
+/* .vertical-navbar {
     top: 0;
     left: 0;
     bottom: 0;
-  }
+  } */
   
+.bg-color-grey{
+  background-color: #121212;
+}
+
+.bg-color-buttons-grey{
+  background-color: #2A2A2A;
+}
+
+.bg-color-buttons-grey:hover{
+  background-color: #353434;
+}
+
   /* Stile degli elementi della navbar */
   .vertical-navbar .nav-link {
     color: #fff; /* Colore del testo */
@@ -22,8 +34,21 @@
 
   .linkhover:hover {
     cursor: pointer;
+    opacity: 1;
+    color: white;
 
   
+}
+.linkhover{
+  opacity: 0.8;
+}
+
+.cardhover{
+  background-color: #181717;
+}
+
+.cardhover:hover{
+  background-color: #292727;
 }
 
 .hoverDropdown:hover{
@@ -36,7 +61,7 @@
   height: 80px;
 }
 
-img {
+nav img {
   height: 50px;
   width: 50px;
   border-radius: 80%;
