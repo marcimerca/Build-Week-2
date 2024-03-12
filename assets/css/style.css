@@ -69,3 +69,10 @@ nav img {
   width: 50px;
   border-radius: 80%;
 }
+
+.card {
+  width: 150px;
+  height: 200px;
+  margin: 10px;
+  float: left;
+}
