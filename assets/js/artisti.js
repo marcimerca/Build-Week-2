@@ -1,42 +1,35 @@
 const albums5 = [
-  "9411436",
-  "81931",
-  "299821",
-  "261026872",
-  "1238967",
-  "302204417",
-  "182383222",
-  "249141",
-  "549720102",
-  "288437072",
-  "6240279",
-  "77201",
-  "69319552",
-  "418720487",
-  "261026872",
-  "1238967",
-  "302204417",
-  "182383222",
-  "249141",
-  "549720102",
-  "288437072",
-  "6240279",
-  "77201",
-  "69319552",
-  "418720487",
-];
+    "9411436",
+    "81931",
+    "299821",
+    "261026872",
+    "1238967",
+    "302204417",
+    "182383222",
+    "249141",
+    "549720102",
+    "288437072",
+    "6240279",
+    "77201",
+    "69319552",
+    "418720487",
+    "261026872",
+    "1238967",
+    "302204417",
+    "182383222",
+    "249141",
+    "549720102",
+    "288437072",
+    "6240279",
+    "77201",
+    "69319552",
+    "418720487",
+  ];
+  
+  const apiAlbum =
+      "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
 
-const apiAlbum =
-    "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
-
-document.getElementById("cercaButton").addEventListener("click", redirectToPage);
-
-function redirectToPage() {
-  // Cambia 'url_della_pagina' con l'URL della pagina a cui vuoi reindirizzare l'utente
-  window.location.href = 'artisti.html';
-}
-
-// navbar cards
+      // navbar cards
 
 window.addEventListener("load", init);
 async function init() {
