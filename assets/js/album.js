@@ -410,40 +410,52 @@ const loadDetailsAlbum = async () => {
 };
 const posterContainer = document.getElementById("poster-container");
 function displayAlbumDetails() {
-  posterContainer.innerHTML = `<div id="coverTestata" class="col-2 px-0 ">
-                            <div>
-                                <img src="${albumDetails.cover_xl}" class="img-fluid rounded-1" alt="">
-                            </div>
-                        </div>
-                        <div id="contenitoreTesto" class="col-9 text-white">
-                            <div class="d-flex flex-column">
-                                <p class="m-0">Album</p>
-                                <h1 class="m-0 display-1 fw-bold">${albumDetails.title}</h1>
-                                <div class="d-flex flex-row align-items-center gap-1">
-                                    <img src="assets/imgs/main/image-1.jpg" style="width: 20px;" alt="">
-                                    <p class="m-0">Calcutta • 2023 • 11 brani, 35 min 56 sec. </p>
-
-                                </div>
-                            </div>
-                        </div>
-`;
+  posterContainer.innerHTML = `
+        <div id="coverTestata" class="col-2 px-0">
+            <div>
+                <img src="${
+                  albumDetails.cover_xl
+                }" class="img-fluid rounded-1" alt="">
+            </div>
+        </div>
+        <div id="contenitoreTesto" class="col-9 text-white">
+            <div class="d-flex flex-column">
+                <p class="m-0">Album</p>
+                <h1 class="m-0 display-1 fw-bold">${albumDetails.title}</h1>
+                <div class="d-flex flex-row align-items-center gap-1">
+                    <img src="${
+                      albumDetails.artist.picture
+                    }" style="width: 20px;" alt="" class="rounded-5">
+                    <p class="m-0">${
+                      albumDetails.artist.name
+                    } • ${albumDetails.release_date.slice(0, 4)} • ${
+    albumDetails.nb_tracks
+  } brani, ${converti(albumDetails.duration)}
+</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function converti(duration) {
+  return `${Math.floor(duration / 60)} min ${Math.ceil(duration % 60)} sec.`;
 }
 
 {
   /* <div id="coverTestata" class="col-2 px-0 ">
-                            <div>
-                                <img src="assets/imgs/main/image-12.jpg" class="img-fluid rounded-1" alt="">
-                            </div>
-                        </div>
-                        <div id="contenitoreTesto" class="col-9 text-white">
-                            <div class="d-flex flex-column">
-                                <p class="m-0">Album</p>
-                                <h1 class="m-0 display-1 fw-bold">Nome</h1>
-                                <div class="d-flex flex-row align-items-center gap-1">
-                                    <img src="assets/imgs/main/image-1.jpg" style="width: 20px;" alt="">
-                                    <p class="m-0">Calcutta • 2023 • 11 brani, 35 min 56 sec. </p>
-
-                                </div>
-                            </div>
-                        </div> */
+                              <div>
+                                  <img src="assets/imgs/main/image-12.jpg" class="img-fluid rounded-1" alt="">
+                              </div>
+                          </div>
+                          <div id="contenitoreTesto" class="col-9 text-white">
+                              <div class="d-flex flex-column">
+                                  <p class="m-0">Album</p>
+                                  <h1 class="m-0 display-1 fw-bold">Nome</h1>
+                                  <div class="d-flex flex-row align-items-center gap-1">
+                                      <img src="assets/imgs/main/image-1.jpg" style="width: 20px;" alt="">
+                                      <p class="m-0">Calcutta • 2023 • 11 brani, 35 min 56 sec. </p>
+  
+                                  </div>
+                              </div>
+                          </div> */
 }
