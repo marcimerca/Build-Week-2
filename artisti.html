@@ -18,7 +18,7 @@
 <!--Main-->
 
 <body class="bg-black">
-  <div class="container-fluid">
+  <div class="container-fluid position-relative">
     <div class="row d-flex">
       <div class="container-fluid col-3" style="height: 100%">
         <nav class="vertical-navbar m-2 rounded">
@@ -254,7 +254,7 @@
               <form class="d-flex m-3 rounded-5" role="search">
                 <input class="form-control me-2 rounded-5 bg-dark text-white" type="search" placeholder="Search"
                   aria-label="Search">
-                  <button id="cercaButton" class="btn btn-outline-success text-white rounded-5" type="button">Cerca</button>
+                <button class="btn btn-outline-success text-white rounded-5" type="submit">Cerca</button>
               </form>
             </div>
           </div>
@@ -273,270 +273,68 @@
             </button>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-1.jpeg" class="card-img-top" alt="Ace of Hearts">
+        <div class="container-fluid mt-3">
+            <div class="position-relative" style="background-image: url(assets/imgs/main/image-12.jpg); background-size:cover; background-position: center; height: 300px;">
+                <div class="position-absolute bottom-0 start-0 p-3 text-white">
+                    <i class="bi bi-patch-check-fill"></i>
+                    <h1 class="mb-3">Nome dell'Artista</h1>
+                    <p>Numero di ascoltatori</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 d-inline-flex">
+            <button class="btnPlay position-relative btn btn-success rounded-5">
+                <i class="bi bi-play-fill"></i>
+            </button>
+            <span class="linkhover badge bg-color-buttons-grey rounded-4 fs-6 py-2 ms-2 align-self-center">Segui</span>
+            <span class="linkhover badge bg-color-buttons-grey rounded-4 fs-6 py-2 ms-2 align-self-center">
+                <i class="bi bi-three-dots"></i>
+            </span>
+        </div>
+        <div>
+            <h2 class="text-white mt-4 mb-4">Popolari</h2>
+          </div>
+          <div class="container d-flex d-inline-flex">
+            <div class="row align-items-center">
+              <div class="col-3">
+                <img src="assets/imgs/main/image-19.jpg" class="img-fluid" style="height: 50px;" alt="Immagine">
+              </div>
+              <div class="col-9">
+                <p class="text-white">Testo accanto all'immagine</p>
               </div>
             </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-2.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-3.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-4.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-5.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-6.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-7.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-8.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-9.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-10.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-11.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-12.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-13.jpeg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-14.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-15.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-16.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-17.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-18.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-19.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-20.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-21.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-22.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-23.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-24.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-25.jpeg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-26.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-27.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-28.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-29.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-30.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-31.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-32.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-33.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-34.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-35.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-36.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-37.jpeg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-38.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-39.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-40.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-41.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-42.png" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-43.png" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-44.png" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-45.png" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-46.jpeg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-47.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-48.jpeg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-49.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-50.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-51.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            <div class="col-2 mt-3">
-              <div class="card">
-                <img src="assets/imgs/search/image-52.jpg" class="card-img-top" alt="Ace of Hearts">
-              </div>
-            </div>
-            
+          </div>
 
+          <div class="container d-flex d-inline-flex mt-4">
+            <div class="row align-items-center">
+              <div class="col-3">
+                <img src="assets/imgs/main/image-19.jpg" class="img-fluid" style="height: 50px;" alt="Immagine">
+              </div>
+              <div class="col-9">
+                <p class="text-white">Testo accanto all'immagine</p>
+              </div>
+            </div>
+          </div>
+          <div class="container d-flex d-inline-flex mt-4">
+            <div class="row align-items-center">
+              <div class="col-3">
+                <img src="assets/imgs/main/image-19.jpg" class="img-fluid" style="height: 50px;" alt="Immagine">
+              </div>
+              <div class="col-9">
+                <p class="text-white">Testo accanto all'immagine</p>
+              </div>
+            </div>
+          </div>
+          <div class="container d-flex d-inline-flex mt-4">
+            <div class="row align-items-center">
+              <div class="col-3">
+                <img src="assets/imgs/main/image-19.jpg" class="img-fluid" style="height: 50px;" alt="Immagine">
+              </div>
+              <div class="col-9">
+                <p class="text-white">Testo accanto all'immagine</p>
+              </div>
+            </div>
+          </div>
         <!--footer-->
         <footer class="mx-4">
           <div class="d-flex flex-wrap border-bottom">
@@ -589,6 +387,50 @@
         </footer>
       </div>
     </div>
+    <div class="fixed-bottom">
+        <div class="music-player">
+          <div class="song-bar">
+            <div id="songInfo" class="song-infos">
+              <!-- <div class="image-container">
+                          <img src="..." alt="" />
+                      </div>
+                      <div class="song-description">
+                          <p class="title linkhover">
+                              Alba
+                          </p>
+                          <p class="artist linkhover">Civico97</p>
+                      </div> -->
+            </div>
+          </div>
+          <div class="progress-controller">
+            <div class="control-buttons">
+              <i class="fs-5 linkhover bi bi-shuffle"></i>
+              <i class="fs-5 linkhover bi bi-skip-backward" id="backward"></i>
+              <i class="fs-1 linkhover bi bi-play" id="play"></i>
+              <i class="fs-5 linkhover bi bi-skip-forward" id="forward"></i>
+              <i class="fs-5 linkhover bi bi-repeat"></i>
+            </div>
+            <div class="progress-container" id="progress">
+              <span>0:00</span>
+              <div class="progress-bar">
+                <div class="progress"></div>
+              </div>
+              <span>3:15</span>
+            </div>
+          </div>
+  
+          <i class="linkhover bi bi-file-play m-2"></i>
+          <i class="linkhover bi bi-view-list m-2"></i>
+          <i class="linkhover bi bi-pc-display m-2"></i>
+          <i class="linkhover bi bi-volume-up fs-4"></i>
+  
+          <div id="volume">
+            <input type="range" class="form-range m-2 w-75" id="volumeControl" min="0" max="100">
+          </div>
+  
+          <i class="bi bi-arrows-angle-expand"></i>
+        </div>
+      </div>
   </div>
 
   <!-- Footer-->
