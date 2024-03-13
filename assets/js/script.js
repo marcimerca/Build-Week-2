@@ -126,7 +126,8 @@ function displayAlbumCard(albumsObjectsArray, destinationDiv) {
     });
 }
 function gotoAlbumPage(id) {
-    window.location.href = `cerca.html?id=${id}`;
+
+  window.location.href = `album.html?id=${id}`;
 }
 
 function playAlbum(album) {
