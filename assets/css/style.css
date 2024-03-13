@@ -216,6 +216,7 @@ i:hover {
 }
 .progress-controller {
   width: 100%;
+  margin-left: 12%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -255,7 +256,7 @@ i:hover {
 .progress {
   position: relative;
   height: 100%;
-  width: 30%;
+  width: 0;
   border-radius: 10px;
   background-color: var(--secondary-color);
 }
@@ -290,4 +291,12 @@ i:hover {
 }
 .volume-bar .progress-bar:hover .progress::after {
   --size: 0.8em;
+}
+
+#volume {
+  margin-right: 0;
+}
+
+footer {
+  margin-bottom: 7%;
 }
