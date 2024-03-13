@@ -75,6 +75,7 @@ async function init() {
     loadAlbums(albums3, divCanzoni3, albumsObjects3),
     loadMiniCards(),
     loadNavbarCards(),
+    loadDetailsAlbum(),
   ]);
 }
 
@@ -126,7 +127,7 @@ function displayAlbumCard(albumsObjectsArray, destinationDiv) {
   });
 }
 function gotoAlbumPage(id) {
-  window.location.href = `album.html?id=${id}`;
+  window.location.href = `cerca.html?id=${id}`;
 }
 
 function playAlbum(album) {
@@ -389,3 +390,60 @@ function displayNavbarCard() {
 //     <p class="mb-0">Artista</p>
 //   </div>
 // </div>;
+
+// parte params
+
+const params = new URLSearchParams(location.search);
+const id = params.get("id"); //ottengo l'id della pagina
+console.log(id);
+
+let albumDetails = {};
+const loadDetailsAlbum = async () => {
+  try {
+    const response = await fetch(apiAlbum + id);
+    albumDetails = await response.json();
+    console.log(albumDetails);
+    displayAlbumDetails();
+  } catch (error) {
+    console.log(error);
+  }
+};
+const posterContainer = document.getElementById("poster-container");
+function displayAlbumDetails() {
+  posterContainer.innerHTML = `<div id="coverTestata" class="col-2 px-0 ">
+                            <div>
+                                <img src="${albumDetails.cover_xl}" class="img-fluid rounded-1" alt="">
+                            </div>
+                        </div>
+                        <div id="contenitoreTesto" class="col-9 text-white">
+                            <div class="d-flex flex-column">
+                                <p class="m-0">Album</p>
+                                <h1 class="m-0 display-1 fw-bold">${albumDetails.title}</h1>
+                                <div class="d-flex flex-row align-items-center gap-1">
+                                    <img src="assets/imgs/main/image-1.jpg" style="width: 20px;" alt="">
+                                    <p class="m-0">Calcutta • 2023 • 11 brani, 35 min 56 sec. </p>
+
+                                </div>
+                            </div>
+                        </div>
+`;
+}
+
+{
+  /* <div id="coverTestata" class="col-2 px-0 ">
+                            <div>
+                                <img src="assets/imgs/main/image-12.jpg" class="img-fluid rounded-1" alt="">
+                            </div>
+                        </div>
+                        <div id="contenitoreTesto" class="col-9 text-white">
+                            <div class="d-flex flex-column">
+                                <p class="m-0">Album</p>
+                                <h1 class="m-0 display-1 fw-bold">Nome</h1>
+                                <div class="d-flex flex-row align-items-center gap-1">
+                                    <img src="assets/imgs/main/image-1.jpg" style="width: 20px;" alt="">
+                                    <p class="m-0">Calcutta • 2023 • 11 brani, 35 min 56 sec. </p>
+
+                                </div>
+                            </div>
+                        </div> */
+}
