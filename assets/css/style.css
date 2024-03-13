@@ -10,6 +10,17 @@
     bottom: 0;
   } */
   
+  .card-sm {
+    max-width: 200px; /* Dimensioni più piccole */
+    transition: transform 0.3s; /* Effetto di transizione */
+  }
+  
+  .card-sm:hover {
+    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+  }
+
+
+
 
 
   body {
