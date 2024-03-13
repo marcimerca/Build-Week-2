@@ -70,9 +70,7 @@ let item;
 window.addEventListener("load", init);
 async function init() {
     await Promise.all([
-        loadAlbums(albums, divCanzoni, albumsObjects),
-        loadAlbums(albums2, divCanzoni2, albumsObjects2),
-        loadAlbums(albums3, divCanzoni3, albumsObjects3),
+        loadAlbums(),
         loadMiniCards(),
         loadNavbarCards(),
     ]);
@@ -88,22 +86,32 @@ let albumsObjects3 = [];
 let albumsObjects4 = [];
 let albumsObjects5 = [];
 
-async function loadAlbums(albumsArray, destinationDiv, albumsObjectsArray) {
+async function loadAlbums() {
     try {
-        for (let i = 0; i < albumsArray.length; i++) {
-            const response = await fetch(apiAlbum + albumsArray[i]);
+        for (let i = 0; i < albums.length; i++) {
+            const response = await fetch(apiAlbum + albums[i]);
             const itemProva = await response.json();
-            albumsObjectsArray.push(itemProva);
+            albumsObjects.push(itemProva);
         }
-        displayAlbumCard(albumsObjectsArray, destinationDiv);
-        console.log(albumsObjectsArray);
-        console.log(albumsObjectsArray[0].tracks.data[0].preview);
+        displayAlbumCard(albumsObjects, divCanzoni, 1);
+        for (let i = 0; i < albums2.length; i++) {
+            const response = await fetch(apiAlbum + albums2[i]);
+            const itemProva = await response.json();
+            albumsObjects2.push(itemProva);
+        }
+        displayAlbumCard(albumsObjects2, divCanzoni2, 2);
+        for (let i = 0; i < albums3.length; i++) {
+            const response = await fetch(apiAlbum + albums3[i]);
+            const itemProva = await response.json();
+            albumsObjects3.push(itemProva);
+        }
+        displayAlbumCard(albumsObjects3, divCanzoni3, 3);
     } catch (error) {
         console.log(error);
     }
 }
 
-function displayAlbumCard(albumsObjectsArray, destinationDiv) {
+function displayAlbumCard(albumsObjectsArray, destinationDiv, numero) {
     albumsObjectsArray.forEach((albumsObject) => {
         const cardDiv = document.createElement("div");
         cardDiv.innerHTML = `<div class="me-3 rounded-2 p-3 h-100 cardhover">
@@ -121,7 +129,7 @@ function displayAlbumCard(albumsObjectsArray, destinationDiv) {
         </div>`;
 
         const btnPlay = cardDiv.querySelector(".btnPlay");
-        btnPlay.addEventListener("click", () => playAlbum(albumsObject));
+        btnPlay.addEventListener("click", () => playAlbum(albumsObject, numero));
         destinationDiv.appendChild(cardDiv);
     });
 }
@@ -130,10 +138,10 @@ function gotoAlbumPage(id) {
   window.location.href = `album.html?id=${id}`;
 }
 
-function playAlbum(album) {
+function playAlbum(album, numero) {
     const trackUrl = album.tracks.data[0].preview;
     if (trackUrl) {
-      playAudio(trackUrl);
+      playAudio(trackUrl, numero);
        // Ottieni le informazioni della traccia
        const trackImage = album.cover_xl;
        const trackTitle = album.title;
@@ -155,32 +163,6 @@ function playAlbum(album) {
       console.error("Track preview not available");
     }
   }
-function togglePlay() {
-    if (currentAudioPlayer.paused) {
-        currentAudioPlayer.play();
-        document.getElementById("play").classList.remove("bi-play");
-        document.getElementById("play").classList.add("bi-pause");
-    } else {
-        currentAudioPlayer.pause();
-        document.getElementById("play").classList.remove("bi-pause");
-        document.getElementById("play").classList.add("bi-play");
-    }
-}
-
-function nextSong() {
-    currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
-    playAlbum(albumsObjects[currentAlbumIndex]);
-}
-
-function previousSong() {
-    currentAlbumIndex =
-        (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
-    playAlbum(albumsObjects[currentAlbumIndex]);
-}
-
-document.getElementById("play").addEventListener("click", togglePlay);
-document.getElementById("forward").addEventListener("click", nextSong);
-document.getElementById("backward").addEventListener("click", previousSong);
 
 async function searchDeezer() {
     const query = document.getElementById("search-input").value;
@@ -222,9 +204,11 @@ function playTrack(trackId) {
 }
 
 let currentAudioPlayer;
+let currentAlbum;
 
 // Funzione per riprodurre una traccia audio
-function playAudio(trackUrl) {
+function playAudio(trackUrl, numero) {
+    currentAlbum = numero
     if (currentAudioPlayer) {
         currentAudioPlayer.pause(); // Interrompe la traccia attualmente in riproduzione
     }
@@ -285,15 +269,54 @@ function togglePlay() {
 
 // Funzione per passare alla canzone successiva
 function nextSong() {
-    currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
-    playAlbum(albumsObjects[currentAlbumIndex]);
+    switch (currentAlbum) {
+        case 1: 
+            currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
+            playAlbum(albumsObjects[currentAlbumIndex], 1);
+            break;
+        case 2:
+            currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects2.length;
+            playAlbum(albumsObjects2[currentAlbumIndex], 2);
+            break;
+        case 3:
+            currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects3.length;
+            playAlbum(albumsObjects3[currentAlbumIndex], 3);
+            break;
+        case 4:
+            currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects4.length;
+            playAlbum(albumsObjects4[currentAlbumIndex], 4);
+            break;
+        case 5:
+            currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects5.length;
+            playAlbum(albumsObjects5[currentAlbumIndex], 5);
+            break;
+    }
 }
 
 // Funzione per passare alla canzone precedente
 function previousSong() {
-    currentAlbumIndex =
-        (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
-    playAlbum(albumsObjects[currentAlbumIndex]);
+    switch (currentAlbum) {
+        case 1: 
+            currentAlbumIndex = (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
+            playAlbum(albumsObjects[currentAlbumIndex], 1);
+            break;
+        case 2:
+            currentAlbumIndex = (currentAlbumIndex - 1 + albumsObjects2.length) % albumsObjects2.length;
+            playAlbum(albumsObjects2[currentAlbumIndex], 2);
+            break;
+        case 3:
+            currentAlbumIndex = (currentAlbumIndex - 1 + albumsObjects3.length) % albumsObjects3.length;
+            playAlbum(albumsObjects3[currentAlbumIndex], 3);
+            break;
+        case 4:
+            currentAlbumIndex = (currentAlbumIndex - 1 + albumsObjects4.length) % albumsObjects4.length;
+            playAlbum(albumsObjects4[currentAlbumIndex], 4);
+            break;
+        case 5:
+            currentAlbumIndex = (currentAlbumIndex - 1 + albumsObjects5.length) % albumsObjects5.length;
+            playAlbum(albumsObjects4[currentAlbumIndex], 5);
+            break;
+    }
 }
 
 // Aggiungi gestori di eventi per i pulsanti
@@ -346,7 +369,7 @@ function displayMiniCard() {
   </div>
 `;
         const btnPlay = divCard.querySelector(".btnPlay");
-        btnPlay.addEventListener("click", () => playAlbum(albumsObject));
+        btnPlay.addEventListener("click", () => playAlbum(albumsObject, 4));
         divMiniCards.appendChild(divCard);
     });
 }
