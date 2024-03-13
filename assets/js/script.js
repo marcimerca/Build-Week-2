@@ -33,6 +33,23 @@ const albums4 = [
   "418720487",
 ];
 const albums5 = [
+  "9411436",
+  "81931",
+  "299821",
+  "261026872",
+  "1238967",
+  "302204417",
+  "182383222",
+  "249141",
+  "549720102",
+  "288437072",
+  "6240279",
+  "77201",
+  "69319552",
+  "418720487",
+  "261026872",
+  "1238967",
+  "302204417",
   "182383222",
   "249141",
   "549720102",
@@ -45,7 +62,8 @@ const albums5 = [
 
 const apiPrincipale =
   "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
-const apiAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/";
+const apiAlbum =
+  "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
 const apiBaseURL = "https://striveschool-api.herokuapp.com/api/deezer/";
 
 let item;
@@ -101,11 +119,16 @@ function displayAlbumCard(albumsObjectsArray, destinationDiv) {
                 </div>
             </div>
         </div>`;
-
+    cardDiv.addEventListener("click", function () {
+      gotoAlbumPage(`${albumsObject.id}`);
+    });
     const btnPlay = cardDiv.querySelector(".btnPlay");
     btnPlay.addEventListener("click", () => playAlbum(albumsObject));
     destinationDiv.appendChild(cardDiv);
   });
+}
+function gotoAlbumPage(id) {
+  window.location.href = `cerca.html?id=${id}`;
 }
 
 function playAlbum(album) {
@@ -341,12 +364,12 @@ function displayNavbarCard() {
       width="47"
       class="rounded-5"
       src="${albumsObject.cover_xl}"
-      alt="img"
+      alt="img" 
     />
   </div>
   <div class="ms-3 d-flex flex-column text-white">
-    <p class="mb-0">${albumsObject.title}</p>
-    <p class="mb-0">Artista</p>
+    <p class="mb-0 text-white">${albumsObject.title}</p>
+    <p class="mb-0 text-white">${albumsObject.artist.name}</p>
   </div>
 `;
 
