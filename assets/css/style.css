@@ -300,3 +300,20 @@ i:hover {
 footer {
   margin-bottom: 7%;
 }
+
+.fs-7{
+  font-size: 12px;
+}
+
+.comparsa i{
+  opacity: 0;
+}
+
+.comparsa:hover i{
+  opacity: 1;
+  
+}
+
+.comparsa:hover{
+  background-color: #292727;
+}
