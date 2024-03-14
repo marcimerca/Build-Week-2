@@ -61,10 +61,16 @@ const albums5 = [
 ];
 
 const apiPrincipale =
-    "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
+    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-    "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
-const apiBaseURL = "https://striveschool-api.herokuapp.com/api/deezer/";
+    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiBaseURL = "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
+const options = {
+    headers: {
+        'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
+        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+    }
+}
 
 let item;
 window.addEventListener("load", init);
@@ -89,19 +95,19 @@ let albumsObjects5 = [];
 async function loadAlbums() {
     try {
         for (let i = 0; i < albums.length; i++) {
-            const response = await fetch(apiAlbum + albums[i]);
+            const response = await fetch(apiAlbum + albums[i],options);
             const itemProva = await response.json();
             albumsObjects.push(itemProva);
         }
         displayAlbumCard(albumsObjects, divCanzoni, 1);
         for (let i = 0; i < albums2.length; i++) {
-            const response = await fetch(apiAlbum + albums2[i]);
+            const response = await fetch(apiAlbum + albums2[i],options);
             const itemProva = await response.json();
             albumsObjects2.push(itemProva);
         }
         displayAlbumCard(albumsObjects2, divCanzoni2, 2);
         for (let i = 0; i < albums3.length; i++) {
-            const response = await fetch(apiAlbum + albums3[i]);
+            const response = await fetch(apiAlbum + albums3[i],options);
             const itemProva = await response.json();
             albumsObjects3.push(itemProva);
         }
@@ -166,7 +172,7 @@ function playAlbum(album, numero) {
 
 async function searchDeezer() {
     const query = document.getElementById("search-input").value;
-    fetch(`${apiBaseURL}search?q=${query}`)
+    fetch(`${apiBaseURL}search?q=${query}`,options)
         .then((response) => response.json())
         .then((data) => {
             displayResults(data.data);
@@ -188,7 +194,7 @@ function displayResults(tracks) {
 }
 
 function playTrack(trackId) {
-    fetch(`${apiBaseURL}track/${trackId}`)
+    fetch(`${apiBaseURL}track/${trackId}`,options)
         .then((response) => response.json())
         .then((data) => {
             const trackUrl = data.preview;
@@ -342,7 +348,7 @@ const divMiniCards = document.getElementById("mini-cards");
 async function loadMiniCards() {
     try {
         for (let i = 0; i < albums4.length; i++) {
-            const response = await fetch(apiAlbum + albums4[i]);
+            const response = await fetch(apiAlbum + albums4[i],options);
             const itemProva = await response.json();
             albumsObjects4.push(itemProva);
         }
@@ -374,14 +380,12 @@ function displayMiniCard() {
     });
 }
 
-// navbar cards
-
 const divNavbarCards = document.getElementById("navbarCards");
 
 async function loadNavbarCards() {
     try {
         for (let i = 0; i < albums5.length; i++) {
-            const response = await fetch(apiAlbum + albums5[i]);
+            const response = await fetch(apiAlbum + albums5[i],options);
             const itemProva = await response.json();
             albumsObjects5.push(itemProva);
         }
