@@ -273,7 +273,7 @@ function displayArtistDetails() {
       arrayAlbumFiltrati.push(elemento);
     }
   });
-  const firstFourAlbums = arrayAlbumFiltrati.slice(0, 4);
+  const firstFourAlbums = arrayAlbumFiltrati.slice(0, 5);
   console.log(firstFourAlbums);
 
   const contenitoreAlbum = document.getElementById("container-album");
@@ -281,9 +281,9 @@ function displayArtistDetails() {
     const singleTrackContainer = document.createElement("div");
     singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
     singleTrackContainer.innerHTML = `<div class="me-3 rounded-2 p-3 h-100 cardhover">
-            <div class="card position-relative bg-transparent border-0" style="width: 12rem">
+            <div class="card bg-transparent border-0" style="width: 12rem">
                 <img onclick="gotoAlbumPage(${track.id})" src="${track.cover_xl}" class="card-img-top" alt="..." />
-                <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
+              
                 <div class="card-body">
                     <h5 class="text-white">${track.title}</h5>
                     <p class="card-text text-white">
@@ -295,6 +295,24 @@ function displayArtistDetails() {
         </div>`;
     contenitoreAlbum.appendChild(singleTrackContainer);
   });
+
+  const coverArtista = document.getElementById("coverArtista");
+  coverArtista.innerHTML = `<div class="position-relative"
+  style="background-image: url(${artistDetails.picture_xl}); background-size:cover; background-repeat: no-repeat;  background-position: center top; height: 400px;">
+  <div class="position-absolute ms-3 bottom-0 start-0 p-3 text-white">
+  <div class="d-flex  flex-row align-items-center gap-2">
+  <i class="bi bi-patch-check-fill text-primary fs-5"></i>
+  <p class="m-0 text-white">Artista Verificato</p>
+  </div>
+    
+    <h1 class="mb-3 display-1 fw-bold">${artistDetails.name}</h1>
+    <p></p>
+  </div>
+</div>`;
+}
+
+function gotoAlbumPage(id) {
+  window.location.href = `album.html?id=${id}`;
 }
 
 function converti(duration) {

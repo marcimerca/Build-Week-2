@@ -130,15 +130,8 @@
             </button>
           </div>
         </div>
-        <div class="container-fluid mt-3">
-          <div class="position-relative"
-            style="background-image: url(assets/imgs/main/image-12.jpg); background-size:cover; background-position: center; height: 300px;">
-            <div class="position-absolute bottom-0 start-0 p-3 text-white">
-              <i class="bi bi-patch-check-fill text-primary fs-5"></i>
-              <h1 class="mb-3">Nome dell'Artista</h1>
-              <p>Numero di ascoltatori</p>
-            </div>
-          </div>
+        <div id="coverArtista" class="container-fluid mt-3">
+         
         </div>
         <div class="mt-5 d-inline-flex">
           <button class="btnPlay position-relative btn btn-success rounded-5">
@@ -170,29 +163,13 @@
 
 
 
-          <div id="container-album">
+          <div>
             <div>
               <h2 class="text-white mt-4">Album</h2>
             </div>
-            <!-- <div class="container-fluid">
-              <div class="row">
-                <div class="col-3 me-3 rounded-2 p-3 h-100 cardhover">
-                  <div class="card position-relative bg-transparent border-0" style="width: 12rem">
-                    <img onclick="gotoAlbumPage(${albumsObject.id})" src="${albumsObject.cover_xl}" class="card-img-top"
-                      alt="..." />
-                    <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i
-                        class="bi bi-play-fill"></i></button>
-                    <div class="card-body">
-                      <h5 class="text-white">${albumsObject.title}</h5>
-                      <p class="card-text text-white">
-                        ${albumsObject.artist.name}
-                      </p>
+            <div id="container-album"  class="d-flex">
 
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+            </div>
           </div>
 
 
