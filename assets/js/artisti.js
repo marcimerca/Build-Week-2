@@ -182,6 +182,7 @@ console.log(nameArtist);
 let artistDetails = {};
 let tracksList = [];
 let tracksDetails = [];
+let albumDet = []; //array di soli album (50)
 const loadArtistDetails = async () => {
   try {
     const response = await fetch(apiPrincipale + nameArtist, {
@@ -215,6 +216,8 @@ const loadArtistDetails = async () => {
       });
       const objectTracks = await fetchTracks.json();
       tracksDetails = objectTracks.data;
+      albumDet = tracksDetails.map((track) => track.album);
+      console.log(albumDet);
       console.log(tracksDetails);
       displayArtistDetails();
       // displayAlbumsDetails();
@@ -230,6 +233,12 @@ function redirectToPage() {
   window.location.href = `artisti.html?name=${inputCerca.value}`;
 }
 contenitoreTracks = document.getElementById("contenitore-tracks");
+let arrayAlbums = [];
+
+tracksDetails.forEach((track) => {
+  console.log(track.album);
+});
+
 function displayArtistDetails() {
   const firstFiveTracks = tracksDetails.slice(0, 5);
   firstFiveTracks.forEach((track, index) => {
@@ -239,8 +248,9 @@ function displayArtistDetails() {
                     class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
                     <div class="d-flex flex-row gap-4 align-items-center">
                       <div style="width:20px">${index + 1}</div>
-                      <div class="p-2"> <img class="rounded-1" style="width:50px;" src="${track.album.cover_small
-      }"" > </div>
+                      <div class="p-2"> <img class="rounded-1" style="width:50px;" src="${
+                        track.album.cover_small
+                      }"" > </div>
                       <div class="d-flex flex-column align-items-start">
                       <p class="m-0">${track.title}</p>
                       <p class="m-0">${track.artist.name}</p>
@@ -253,6 +263,37 @@ function displayArtistDetails() {
                     </div>
                   </div>`;
     contenitoreTracks.appendChild(singleTrackContainer);
+  });
+  const arrayAlbumFiltrati = [];
+  const idVisti = {};
+
+  albumDet.forEach((elemento) => {
+    if (!idVisti[elemento.id]) {
+      idVisti[elemento.id] = true;
+      arrayAlbumFiltrati.push(elemento);
+    }
+  });
+  const firstFourAlbums = arrayAlbumFiltrati.slice(0, 4);
+  console.log(firstFourAlbums);
+
+  const contenitoreAlbum = document.getElementById("container-album");
+  firstFourAlbums.forEach((track, index) => {
+    const singleTrackContainer = document.createElement("div");
+    singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
+    singleTrackContainer.innerHTML = `<div class="me-3 rounded-2 p-3 h-100 cardhover">
+            <div class="card position-relative bg-transparent border-0" style="width: 12rem">
+                <img onclick="gotoAlbumPage(${track.id})" src="${track.cover_xl}" class="card-img-top" alt="..." />
+                <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
+                <div class="card-body">
+                    <h5 class="text-white">${track.title}</h5>
+                    <p class="card-text text-white">
+                        
+                    </p>
+                    
+                </div>
+            </div>
+        </div>`;
+    contenitoreAlbum.appendChild(singleTrackContainer);
   });
 }
 
@@ -275,11 +316,36 @@ function converti(duration) {
   }
 }
 
+{
+  /* <div class="container-fluid">
+  <div class="row">
+    <div class="col-3 me-3 rounded-2 p-3 h-100 cardhover">
+      <div
+        class="card position-relative bg-transparent border-0"
+        style="width: 12rem"
+      >
+        <img
+          onclick="gotoAlbumPage(${albumsObject.id})"
+          src="${albumsObject.cover_xl}"
+          class="card-img-top"
+          alt="..."
+        />
+        <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5">
+          <i class="bi bi-play-fill"></i>
+        </button>
+        <div class="card-body">
+          <h5 class="text-white">${albumsObject.title}</h5>
+          <p class="card-text text-white">${albumsObject.artist.name}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>; */
+}
 
 //ALBUM
 
 // const contenitoreAlbum = document.getElementById('container-album');
-
 
 // function displayAlbumsDetails() {
 //   const firstFiveTracks = tracksDetails.slice(0, 5);
@@ -306,10 +372,6 @@ function converti(duration) {
 //     contenitoreAlbum.appendChild(singleTrackContainer);
 //   });
 // }
-
-
-
-
 
 // const arrayAlbums = tracksDetails.filter(album => {
 //   album.album
