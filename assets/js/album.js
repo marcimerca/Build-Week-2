@@ -25,12 +25,31 @@ const albums5 = [
   "69319552",
   "418720487",
 ];
-
+const posterContainer = document.getElementById("poster-container");
+const contenitoreTracks = document.getElementById("contenitore-tracks");
+const finalDetails = document.getElementById("final-details");
+const divNavbarCards = document.getElementById("navbarCards");
+document.getElementById("play").addEventListener("click", togglePlay);
+document.getElementById("forward").addEventListener("click", nextSong);
+document.getElementById("backward").addEventListener("click", previousSong);
+const params = new URLSearchParams(location.search);
+const id = params.get("id"); //ottengo l'id della pagina
+let albumDetails = {};
+let tracksList = [];
+let albumsObjects5 = [];
+let currentAudioPlayer;
+let currentAlbumIndex = 0;
 const apiPrincipale =
-  "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
+    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-  "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
-const apiBaseURL = "https://striveschool-api.herokuapp.com/api/deezer/";
+    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiBaseURL = "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
+const options = {
+    headers: {
+        'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
+        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+    }
+}
 
 let item;
 window.addEventListener("load", init);
@@ -39,47 +58,9 @@ async function init() {
   await loadDetailsAlbum();
 }
 
-let albumsObjects5 = [];
-
-function playAlbum(album) {
-  const trackUrl = album.tracks.data[0].preview;
-  if (trackUrl) {
-    playAudio(trackUrl);
-  } else {
-    console.error("Track preview not available");
-  }
-}
-
-function togglePlay() {
-  if (currentAudioPlayer.paused) {
-    currentAudioPlayer.play();
-    document.getElementById("play").classList.remove("bi-play");
-    document.getElementById("play").classList.add("bi-pause");
-  } else {
-    currentAudioPlayer.pause();
-    document.getElementById("play").classList.remove("bi-pause");
-    document.getElementById("play").classList.add("bi-play");
-  }
-}
-
-function nextSong() {
-  currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
-  playAlbum(albumsObjects[currentAlbumIndex]);
-}
-
-function previousSong() {
-  currentAlbumIndex =
-    (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
-  playAlbum(albumsObjects[currentAlbumIndex]);
-}
-
-document.getElementById("play").addEventListener("click", togglePlay);
-document.getElementById("forward").addEventListener("click", nextSong);
-document.getElementById("backward").addEventListener("click", previousSong);
-
 async function searchDeezer() {
   const query = document.getElementById("search-input").value;
-  fetch(`${apiBaseURL}search?q=${query}`)
+  fetch(`${apiBaseURL}search?q=${query}`, options)
     .then((response) => response.json())
     .then((data) => {
       displayResults(data.data);
@@ -101,7 +82,7 @@ function displayResults(tracks) {
 }
 
 function playTrack(trackId) {
-  fetch(`${apiBaseURL}track/${trackId}`)
+  fetch(`${apiBaseURL}track/${trackId}`, options)
     .then((response) => response.json())
     .then((data) => {
       const trackUrl = data.preview;
@@ -115,8 +96,6 @@ function playTrack(trackId) {
       console.error("Error fetching track details: ", error);
     });
 }
-
-let currentAudioPlayer;
 
 // Funzione per riprodurre una traccia audio
 function playAudio(trackUrl) {
@@ -163,39 +142,6 @@ function formatTime(time) {
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-let currentAlbumIndex = 0;
-
-// Funzione per riprodurre o mettere in pausa una traccia audio
-function togglePlay() {
-  if (currentAudioPlayer.paused) {
-    currentAudioPlayer.play();
-    document.getElementById("play").classList.remove("bi-play");
-    document.getElementById("play").classList.add("bi-pause");
-  } else {
-    currentAudioPlayer.pause();
-    document.getElementById("play").classList.remove("bi-pause");
-    document.getElementById("play").classList.add("bi-play");
-  }
-}
-
-// Funzione per passare alla canzone successiva
-function nextSong() {
-  currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
-  playAlbum(albumsObjects[currentAlbumIndex]);
-}
-
-// Funzione per passare alla canzone precedente
-function previousSong() {
-  currentAlbumIndex =
-    (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
-  playAlbum(albumsObjects[currentAlbumIndex]);
-}
-
-// Aggiungi gestori di eventi per i pulsanti
-document.getElementById("play").addEventListener("click", togglePlay);
-document.getElementById("forward").addEventListener("click", nextSong);
-document.getElementById("backward").addEventListener("click", previousSong);
-
 //regolatore volume
 document.addEventListener("DOMContentLoaded", function () {
   let volumeControl = document.getElementById("volumeControl");
@@ -208,14 +154,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// navbar cards
-
-const divNavbarCards = document.getElementById("navbarCards");
 
 async function loadNavbarCards() {
   try {
     for (let i = 0; i < albums5.length; i++) {
-      const response = await fetch(apiAlbum + albums5[i]);
+      const response = await fetch(apiAlbum + albums5[i], options);
       const itemProva = await response.json();
       albumsObjects5.push(itemProva);
     }
@@ -249,17 +192,9 @@ function displayNavbarCard() {
   });
 }
 
-// parte params
-
-const params = new URLSearchParams(location.search);
-const id = params.get("id"); //ottengo l'id della pagina
-console.log(id);
-
-let albumDetails = {};
-let tracksList = [];
 const loadDetailsAlbum = async () => {
   try {
-    const response = await fetch(apiAlbum + id);
+    const response = await fetch(apiAlbum + id, options);
     albumDetails = await response.json();
     tracksList = albumDetails.tracks.data;
     console.log(tracksList);
@@ -269,16 +204,13 @@ const loadDetailsAlbum = async () => {
     console.log(error);
   }
 };
-const posterContainer = document.getElementById("poster-container");
-const contenitoreTracks = document.getElementById("contenitore-tracks");
-const finalDetails = document.getElementById("final-details");
+
 function displayAlbumDetails() {
   posterContainer.innerHTML = `
         <div id="coverTestata" class="col-2 px-0">
             <div>
-                <img src="${
-                  albumDetails.cover_xl
-                }" class="img-fluid rounded-1" alt="">
+                <img src="${albumDetails.cover_xl
+    }" class="img-fluid rounded-1" alt="">
             </div>
         </div>
         <div id="contenitoreTesto" class="col-9 text-white">
@@ -286,14 +218,11 @@ function displayAlbumDetails() {
                 <p class="m-0">Album</p>
                 <h1 class="m-0 display-1 fw-bold">${albumDetails.title}</h1>
                 <div class="d-flex flex-row align-items-center gap-1">
-                    <img src="${
-                      albumDetails.artist.picture
-                    }" style="width: 20px;" alt="" class="rounded-5">
-                    <p class="m-0">${
-                      albumDetails.artist.name
-                    } • ${albumDetails.release_date.slice(0, 4)} • ${
-    albumDetails.nb_tracks
-  } brani, ${converti(albumDetails.duration)}
+                    <img src="${albumDetails.artist.picture
+    }" style="width: 20px;" alt="" class="rounded-5">
+                    <p class="m-0">${albumDetails.artist.name
+    } • ${albumDetails.release_date.slice(0, 4)} • ${albumDetails.nb_tracks
+    } brani, ${converti(albumDetails.duration)}
 </p>
                 </div>
             </div>
@@ -308,7 +237,7 @@ function displayAlbumDetails() {
                     <div class="d-flex flex-row gap-4 align-items-center">
                       <div style="width:20px">${index + 1}</div>
                       <div class="d-flex flex-column align-items-start">
-                      <p class="m-0">${track.title}</p>
+                      <p class="m-0" id="track-${index+1}">${track.title}</p>
                       <p class="m-0">${albumDetails.artist.name}</p>
                       </div>
                     </div>
@@ -319,12 +248,78 @@ function displayAlbumDetails() {
                     </div>
                   </div>`;
     contenitoreTracks.appendChild(singleTrackContainer);
+    const trackPlayer = document.getElementById('track-'+(index+1))
+    trackPlayer.addEventListener("click", () => {
+      playAlbum(track.preview)
+      currentAlbumIndex = index
+    });
   });
   finalDetails.innerHTML = `<p class="m-0">${convertiData(
     albumDetails.release_date
   )}</p>
               <p class="m-0">&copy;${albumDetails.label} </p>`;
 }
+
+function playSong(album, numero) {
+  const trackUrl = album.tracks.data[0].preview;
+  if (trackUrl) {
+    playAudio(trackUrl, numero);
+     
+     const trackImage = album.cover_xl;
+     const trackTitle = album.title;
+     const trackArtist = album.artist.name;
+
+     
+     const songInfoDiv = document.getElementById("songInfo");
+     songInfoDiv.innerHTML = ` <div class="image-container">
+     <img src="${index + 1}" alt="Track Image">
+   </div>
+   <div class="song-description">
+     <p class="title">${track.title}</p>
+     <p class="artist">${albumDetails.artist.name}</p>
+   </div>
+   <div class="icons">
+                    <i class="fs-4 linkhover bi bi-heart"></i>
+                </div>`;
+  } else {
+    console.error("Track preview not available");
+  }
+}
+
+
+function playAlbum(preview) {
+  if (preview) {
+    playAudio(preview);
+  } else {
+    console.error("Track preview not available");
+  }
+}
+
+function togglePlay() {
+  if (currentAudioPlayer.paused) {
+    currentAudioPlayer.play();
+    document.getElementById("play").classList.remove("bi-play");
+    document.getElementById("play").classList.add("bi-pause");
+  } else {
+    currentAudioPlayer.pause();
+    document.getElementById("play").classList.remove("bi-pause");
+    document.getElementById("play").classList.add("bi-play");
+  }
+}
+
+
+function nextSong() {
+  currentAlbumIndex = (currentAlbumIndex + 1) % tracksList.length;
+  playAlbum(tracksList[currentAlbumIndex].preview);
+}
+
+function previousSong() {
+  currentAlbumIndex =
+    (currentAlbumIndex - 1 + tracksList.length) % tracksList.length;
+  playAlbum(tracksList[currentAlbumIndex].preview);
+}
+
+
 function converti(duration) {
   const minutes = Math.floor(duration / 60);
   const seconds = Math.ceil(duration % 60);
