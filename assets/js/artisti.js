@@ -1,49 +1,48 @@
 const albums5 = [
-    "9411436",
-    "81931",
-    "299821",
-    "261026872",
-    "1238967",
-    "302204417",
-    "182383222",
-    "249141",
-    "549720102",
-    "288437072",
-    "6240279",
-    "77201",
-    "69319552",
-    "418720487",
-    "261026872",
-    "1238967",
-    "302204417",
-    "182383222",
-    "249141",
-    "549720102",
-    "288437072",
-    "6240279",
-    "77201",
-    "69319552",
-    "418720487",
-  ];
-  
-  const apiAlbum =
-      "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
+  "9411436",
+  "81931",
+  "299821",
+  "261026872",
+  "1238967",
+  "302204417",
+  "182383222",
+  "249141",
+  "549720102",
+  "288437072",
+  "6240279",
+  "77201",
+  "69319552",
+  "418720487",
+  "261026872",
+  "1238967",
+  "302204417",
+  "182383222",
+  "249141",
+  "549720102",
+  "288437072",
+  "6240279",
+  "77201",
+  "69319552",
+  "418720487",
+];
 
-      // navbar cards
+const apiAlbum =
+  "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
+const apiPrincipale =
+  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+const apiAuthor =
+  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/artist/";
+const proxy = "https://corsproxy.io/?";
+// navbar cards
 
 window.addEventListener("load", init);
 async function init() {
-  await Promise.all([
-
-    loadNavbarCards(),
-  ]);
+  await loadNavbarCards();
+  await loadArtistDetails();
 }
-
-
 
 const divNavbarCards = document.getElementById("navbarCards");
 let albumsObjects5 = [];
-
 
 async function loadNavbarCards() {
   try {
@@ -82,81 +81,79 @@ function displayNavbarCard() {
   });
 }
 
-
-
 let currentAudioPlayer;
 
 // Funzione per riprodurre una traccia audio
 function playAudio(trackUrl) {
-    if (currentAudioPlayer) {
-        currentAudioPlayer.pause(); // Interrompe la traccia attualmente in riproduzione
-    }
+  if (currentAudioPlayer) {
+    currentAudioPlayer.pause(); // Interrompe la traccia attualmente in riproduzione
+  }
 
-    // Crea un nuovo player audio
-    const audioPlayer = new Audio(trackUrl);
-    audioPlayer.play(); // Avvia la nuova traccia audio
-    currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
+  // Crea un nuovo player audio
+  const audioPlayer = new Audio(trackUrl);
+  audioPlayer.play(); // Avvia la nuova traccia audio
+  currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
 
-    updateProgress();
+  updateProgress();
 }
 // Funzione per aggiornare la barra di avanzamento
 function updateProgress() {
-    const progressBar = document.querySelector(".progress");
-    const currentTime = currentAudioPlayer.currentTime;
-    const duration = currentAudioPlayer.duration;
-    const progressPercent = (currentTime / duration) * 100;
-    progressBar.style.width = `${progressPercent}%`;
+  const progressBar = document.querySelector(".progress");
+  const currentTime = currentAudioPlayer.currentTime;
+  const duration = currentAudioPlayer.duration;
+  const progressPercent = (currentTime / duration) * 100;
+  progressBar.style.width = `${progressPercent}%`;
 
-    // Aggiorna il tempo corrente nella barra di avanzamento
-    const currentTimeElement = document.querySelector(
-        ".progress-container span:first-child"
-    );
-    currentTimeElement.textContent = formatTime(currentTime);
+  // Aggiorna il tempo corrente nella barra di avanzamento
+  const currentTimeElement = document.querySelector(
+    ".progress-container span:first-child"
+  );
+  currentTimeElement.textContent = formatTime(currentTime);
 
-    // Aggiorna il tempo rimanente nella barra di avanzamento
-    const remainingTime = duration - currentTime;
-    const remainingTimeElement = document.querySelector(
-        ".progress-container span:last-child"
-    );
-    remainingTimeElement.textContent = formatTime(remainingTime);
+  // Aggiorna il tempo rimanente nella barra di avanzamento
+  const remainingTime = duration - currentTime;
+  const remainingTimeElement = document.querySelector(
+    ".progress-container span:last-child"
+  );
+  remainingTimeElement.textContent = formatTime(remainingTime);
 
-    // Richiama la funzione nuovamente dopo un breve intervallo
-    setTimeout(updateProgress, 500);
+  // Richiama la funzione nuovamente dopo un breve intervallo
+  setTimeout(updateProgress, 500);
 }
 
 // Funzione per formattare il tempo in formato mm:ss
 function formatTime(time) {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
 let currentAlbumIndex = 0;
 
 // Funzione per riprodurre o mettere in pausa una traccia audio
 function togglePlay() {
-    if (currentAudioPlayer.paused) {
-        currentAudioPlayer.play();
-        document.getElementById("play").classList.remove("bi-play");
-        document.getElementById("play").classList.add("bi-pause");
-    } else {
-        currentAudioPlayer.pause();
-        document.getElementById("play").classList.remove("bi-pause");
-        document.getElementById("play").classList.add("bi-play");
-    }
+  if (currentAudioPlayer.paused) {
+    currentAudioPlayer.play();
+    document.getElementById("play").classList.remove("bi-play");
+    document.getElementById("play").classList.add("bi-pause");
+  } else {
+    currentAudioPlayer.pause();
+    document.getElementById("play").classList.remove("bi-pause");
+    document.getElementById("play").classList.add("bi-play");
+  }
 }
 
 // Funzione per passare alla canzone successiva
 function nextSong() {
-    currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
-    playAlbum(albumsObjects[currentAlbumIndex]);
+  currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
+  playAlbum(albumsObjects[currentAlbumIndex]);
 }
 
 // Funzione per passare alla canzone precedente
 function previousSong() {
-    currentAlbumIndex =
-        (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
-    playAlbum(albumsObjects[currentAlbumIndex]);
+  currentAlbumIndex =
+    (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
+  playAlbum(albumsObjects[currentAlbumIndex]);
 }
 
 // Aggiungi gestori di eventi per i pulsanti
@@ -166,12 +163,57 @@ document.getElementById("backward").addEventListener("click", previousSong);
 
 //regolatore volume
 document.addEventListener("DOMContentLoaded", function () {
-    let volumeControl = document.getElementById("volumeControl");
+  let volumeControl = document.getElementById("volumeControl");
 
-    volumeControl.addEventListener("input", function () {
-        let volume = volumeControl.value / 100; // Converti il valore in scala da 0 a 1
-        if (currentAudioPlayer) {
-            currentAudioPlayer.volume = volume; // Imposta il volume dell'audio attualmente in riproduzione
-        }
-    });
+  volumeControl.addEventListener("input", function () {
+    let volume = volumeControl.value / 100; // Converti il valore in scala da 0 a 1
+    if (currentAudioPlayer) {
+      currentAudioPlayer.volume = volume; // Imposta il volume dell'audio attualmente in riproduzione
+    }
+  });
 });
+
+// parte params
+
+const params = new URLSearchParams(location.search);
+const nameArtist = params.get("name"); //ottengo il nome dell'artista
+console.log(nameArtist);
+
+let artistDetails = {};
+let tracksList = [];
+let tracksDetails = [];
+const loadArtistDetails = async () => {
+  try {
+    const response = await fetch(apiPrincipale + nameArtist, {
+      headers: {
+        "X-RapidAPI-Key": "828e7fcfe3mshe4aae5ec5cd4aa8p194e34jsnce9825cd925e",
+        "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+      },
+    });
+    artistDetails = await response.json();
+    if (artistDetails.data.length > 0) {
+      const idArtista = artistDetails.data[0].artist.id;
+
+      const fetchArtista = await fetch(apiAuthor + idArtista, {
+        headers: {
+          "X-RapidAPI-Key":
+            "828e7fcfe3mshe4aae5ec5cd4aa8p194e34jsnce9825cd925e",
+          "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+        },
+      });
+      artistDetails = await fetchArtista.json();
+      console.log(artistDetails);
+    }
+    const fetchTracks = await fetch(proxy + artistDetails.tracklist, {
+      headers: {
+        "X-RapidAPI-Key": "828e7fcfe3mshe4aae5ec5cd4aa8p194e34jsnce9825cd925e",
+        "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+      },
+    });
+    const objectTracks = await fetchTracks.json();
+    tracksDetails = objectTracks.data;
+    console.log(tracksDetails);
+  } catch (error) {
+    console.log(error);
+  }
+};
