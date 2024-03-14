@@ -1,37 +1,3 @@
-const albums = [
-  "5327691",
-  "363906907",
-  "217489292",
-  "359324967",
-  "324894",
-  "65373012",
-];
-const albums2 = [
-  "125958",
-  "43681",
-  "754485",
-  "14781033",
-  "502369701",
-  "13994766",
-];
-const albums3 = [
-  "333758737",
-  "547047802",
-  "256224762",
-  "556764162",
-  "115603002",
-  "65373012",
-];
-const albums4 = [
-  "182383222",
-  "249141",
-  "549720102",
-  "288437072",
-  "6240279",
-  "77201",
-  "69319552",
-  "418720487",
-];
 const albums5 = [
   "9411436",
   "81931",
@@ -69,66 +35,11 @@ const apiBaseURL = "https://striveschool-api.herokuapp.com/api/deezer/";
 let item;
 window.addEventListener("load", init);
 async function init() {
-  await Promise.all([
-    loadAlbums(albums, divCanzoni, albumsObjects),
-    loadAlbums(albums2, divCanzoni2, albumsObjects2),
-    loadAlbums(albums3, divCanzoni3, albumsObjects3),
-    loadMiniCards(),
-    loadNavbarCards(),
-    loadDetailsAlbum(),
-  ]);
+  await loadNavbarCards();
+  await loadDetailsAlbum();
 }
 
-const divCanzoni = document.getElementById("canzoni");
-const divCanzoni2 = document.getElementById("canzoni2");
-const divCanzoni3 = document.getElementById("canzoni3");
-
-let albumsObjects = [];
-let albumsObjects2 = [];
-let albumsObjects3 = [];
-let albumsObjects4 = [];
 let albumsObjects5 = [];
-
-async function loadAlbums(albumsArray, destinationDiv, albumsObjectsArray) {
-  try {
-    for (let i = 0; i < albumsArray.length; i++) {
-      const response = await fetch(apiAlbum + albumsArray[i]);
-      const itemProva = await response.json();
-      albumsObjectsArray.push(itemProva);
-    }
-    displayAlbumCard(albumsObjectsArray, destinationDiv);
-    console.log(albumsObjectsArray);
-    console.log(albumsObjectsArray[0].tracks.data[0].preview);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function displayAlbumCard(albumsObjectsArray, destinationDiv) {
-  albumsObjectsArray.forEach((albumsObject) => {
-    const cardDiv = document.createElement("div");
-    cardDiv.innerHTML = `<div class="me-3 rounded-2 p-3 h-100 cardhover">
-            <div class="card position-relative bg-transparent border-0" style="width: 12rem">
-                <img onclick="gotoAlbumPage(${albumsObject.id})" src="${albumsObject.cover_xl}" class="card-img-top" alt="..." />
-                <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
-                <div class="card-body">
-                    <h5 class="text-white">${albumsObject.title}</h5>
-                    <p class="card-text text-white">
-                        ${albumsObject.artist.name}
-                    </p>
-                    
-                </div>
-            </div>
-        </div>`;
-
-    const btnPlay = cardDiv.querySelector(".btnPlay");
-    btnPlay.addEventListener("click", () => playAlbum(albumsObject));
-    destinationDiv.appendChild(cardDiv);
-  });
-}
-function gotoAlbumPage(id) {
-  window.location.href = `cerca.html?id=${id}`;
-}
 
 function playAlbum(album) {
   const trackUrl = album.tracks.data[0].preview;
@@ -297,44 +208,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// parte popolamento mini cards
-const divMiniCards = document.getElementById("mini-cards");
-
-async function loadMiniCards() {
-  try {
-    for (let i = 0; i < albums4.length; i++) {
-      const response = await fetch(apiAlbum + albums4[i]);
-      const itemProva = await response.json();
-      albumsObjects4.push(itemProva);
-    }
-    displayMiniCard();
-    console.log(albumsObjects4);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function displayMiniCard() {
-  albumsObjects4.forEach((albumsObject) => {
-    const divCard = document.createElement("div");
-    divCard.classList.add("col-3");
-    divCard.innerHTML = `
-  <div class="d-flex flex-row cardhover p-0 position-relative">
-    <div class="d-flex align-items-center ">
-      <img width="47" src="${albumsObject.cover_xl}" alt="img" />
-      <button class="btnPlay position-absolute end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
-      <div class="ms-3 d-flex flex-column text-white">
-        <p class="mb-0">${albumsObject.title}</p>
-      </div>
-    </div>
-  </div>
-`;
-    const btnPlay = divCard.querySelector(".btnPlay");
-    btnPlay.addEventListener("click", () => playAlbum(albumsObject));
-    divMiniCards.appendChild(divCard);
-  });
-}
-
 // navbar cards
 
 const divNavbarCards = document.getElementById("navbarCards");
@@ -376,21 +249,6 @@ function displayNavbarCard() {
   });
 }
 
-// <div class="d-flex flex-row ms-3 my-3">
-//   <div class="d-flex align-items-center">
-//     <img
-//       width="47"
-//       class="rounded-5"
-//       src="assets/imgs/main/image-16.jpg"
-//       alt="img"
-//     />
-//   </div>
-//   <div class="ms-3 d-flex flex-column text-white">
-//     <p class="mb-0">50 cent</p>
-//     <p class="mb-0">Artista</p>
-//   </div>
-// </div>;
-
 // parte params
 
 const params = new URLSearchParams(location.search);
@@ -398,10 +256,13 @@ const id = params.get("id"); //ottengo l'id della pagina
 console.log(id);
 
 let albumDetails = {};
+let tracksList = [];
 const loadDetailsAlbum = async () => {
   try {
     const response = await fetch(apiAlbum + id);
     albumDetails = await response.json();
+    tracksList = albumDetails.tracks.data;
+    console.log(tracksList);
     console.log(albumDetails);
     displayAlbumDetails();
   } catch (error) {
@@ -409,6 +270,8 @@ const loadDetailsAlbum = async () => {
   }
 };
 const posterContainer = document.getElementById("poster-container");
+const contenitoreTracks = document.getElementById("contenitore-tracks");
+const finalDetails = document.getElementById("final-details");
 function displayAlbumDetails() {
   posterContainer.innerHTML = `
         <div id="coverTestata" class="col-2 px-0">
@@ -436,26 +299,141 @@ function displayAlbumDetails() {
             </div>
         </div>
     `;
+
+  tracksList.forEach((track, index) => {
+    const singleTrackContainer = document.createElement("div");
+    singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
+    singleTrackContainer.innerHTML = `<div
+                    class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
+                    <div class="d-flex flex-row gap-4 align-items-center">
+                      <div style="width:20px">${index + 1}</div>
+                      <div class="d-flex flex-column align-items-start">
+                      <p class="m-0">${track.title}</p>
+                      <p class="m-0">${albumDetails.artist.name}</p>
+                      </div>
+                    </div>
+                    <div class="d-flex gap-3 me-2">
+                      <div><i class="bi bi-heart"></i></div>
+                      <div>${converti(track.duration)}</div>
+                      <div><i class="bi bi-three-dots"></i></div>
+                    </div>
+                  </div>`;
+    contenitoreTracks.appendChild(singleTrackContainer);
+  });
+  finalDetails.innerHTML = `<p class="m-0">${convertiData(
+    albumDetails.release_date
+  )}</p>
+              <p class="m-0">&copy;${albumDetails.label} </p>`;
 }
 function converti(duration) {
-  return `${Math.floor(duration / 60)} min ${Math.ceil(duration % 60)} sec.`;
+  const minutes = Math.floor(duration / 60);
+  const seconds = Math.ceil(duration % 60);
+
+  if (minutes >= 10) {
+    if (seconds < 10) {
+      return `${minutes} min 0${seconds} sec.`;
+    } else {
+      return `${minutes} min ${seconds} sec.`;
+    }
+  } else {
+    if (seconds < 10) {
+      return `${minutes}:0${seconds}`;
+    } else {
+      return `${minutes}:${seconds}`;
+    }
+  }
 }
 
-{
-  /* <div id="coverTestata" class="col-2 px-0 ">
-                              <div>
-                                  <img src="assets/imgs/main/image-12.jpg" class="img-fluid rounded-1" alt="">
-                              </div>
-                          </div>
-                          <div id="contenitoreTesto" class="col-9 text-white">
-                              <div class="d-flex flex-column">
-                                  <p class="m-0">Album</p>
-                                  <h1 class="m-0 display-1 fw-bold">Nome</h1>
-                                  <div class="d-flex flex-row align-items-center gap-1">
-                                      <img src="assets/imgs/main/image-1.jpg" style="width: 20px;" alt="">
-                                      <p class="m-0">Calcutta • 2023 • 11 brani, 35 min 56 sec. </p>
-  
-                                  </div>
-                              </div>
-                          </div> */
+function convertiData(inputDate) {
+  let dateObject = new Date(inputDate);
+  const formattedDate = new Intl.DateTimeFormat("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(dateObject);
+
+  return formattedDate;
 }
+
+// {
+
+//             <div class="d-flex justify-content-between align-items-center">
+//               <div class="d-flex align-items-center gap-3">
+//                 <button class="btnPlay btn btn-lg btn-success rounded-5">
+//                   <i class="bi bi-play-fill"></i>
+//                 </button>
+//                 <i class="fs-4 linkhover bi bi-heart text-secondary"></i>
+//                 <button
+//                   class="btn bg-transparent text-white border-0 btn-secondary bi bi-three-dots"
+//                   type="button"
+//                   data-bs-toggle="dropdown"
+//                   aria-expanded="false"
+//                 ></button>
+//                 <ul class="dropdown-menu bg-dark">
+//                   <li>
+//                     <a class="text-white hoverDropdown dropdown-item" href="#"
+//                       >Recenti</a
+//                     >
+//                   </li>
+//                   <li>
+//                     <a class="text-white hoverDropdown dropdown-item" href="#"
+//                       >Aggiunti di recente</a
+//                     >
+//                   </li>
+//                   <li>
+//                     <a class="text-white hoverDropdown dropdown-item" href="#"
+//                       >Ordine alfabetico</a
+//                     >
+//                   </li>
+//                   <li>
+//                     <a class="text-white hoverDropdown dropdown-item" href="#"
+//                       >Autore</a
+//                     >
+//                   </li>
+//                 </ul>
+//               </div>
+//               <div class="text-white d-flex align-items-start gap-2">
+//                 <p class="m-0">Elenco</p>
+//                 <i class="bi bi-list-ul text-white"></i>
+//               </div>
+//             </div>
+//             <!--contenitore titolo -->
+//             <div>
+//               <div
+//                 class="text-white mb-3 d-flex align-items-center mt-4 justify-content-between border-bottom pb-2 ps-3 border-secondary"
+//               >
+//                 <div class="d-flex gap-3">
+//                   <p class="m-0">#</p>
+//                   <p class="m-0">Titolo</p>
+//                 </div>
+//                 <div>
+//                   <i class="bi bi-clock me-5"></i>
+//                 </div>
+//               </div>
+//               <!-- contenitore singola track -->
+//               <div class="d-flex flex-column text-white">
+//                 <div
+//                   class="d-flex flex-row ps-3 justify-content-between align-items-center comparsa rounded-1"
+//                 >
+//                   <div class="d-flex flex-row gap-4 align-items-center">
+//                     <div>1</div>
+//                     <div class="d-flex flex-column">
+//                       <p class="m-0">Coro</p>
+//                       <p class="m-0">Calcutta</p>
+//                     </div>
+//                   </div>
+
+//                   <div class="d-flex gap-3 me-2">
+//                     <div><i class="bi bi-heart"></i></div>
+//                     <div>2:27</div>
+//                     <div><i class="bi bi-three-dots"></i></div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//             <div class="text-white mt-4 fs-7">
+//               <p class="m-0">20 ottobre 2023</p>
+//               <p class="m-0">&copy; 2023 Bomba Dischi</p>
+//             </div>
+
+// }
