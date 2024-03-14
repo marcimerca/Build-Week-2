@@ -293,7 +293,7 @@ function displayArtistDetails() {
 
   const coverArtista = document.getElementById("coverArtista");
   coverArtista.innerHTML = `<div class="position-relative"
-  style="background-image: url(${artistDetails.picture_xl}); background-size:cover; background-repeat: no-repeat;  background-position: center top; height: 400px;">
+  style="background-image: url(${artistDetails.picture_xl}); background-size:cover; background-repeat: no-repeat;  background-position: center center; height: 500px;">
   <div class="position-absolute ms-3 bottom-0 start-0 p-3 text-white">
   <div class="d-flex  flex-row align-items-center gap-2">
   <i class="bi bi-patch-check-fill text-primary fs-5"></i>
