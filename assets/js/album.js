@@ -312,7 +312,7 @@ function displayAlbumDetails() {
                       <p class="m-0">${albumDetails.artist.name}</p>
                       </div>
                     </div>
-                    <div class="d-flex gap-3 me-2">
+                    <div class="d-flex gap-3 me-2 align-items-center">
                       <div><i class="bi bi-heart"></i></div>
                       <div>${converti(track.duration)}</div>
                       <div><i class="bi bi-three-dots"></i></div>
