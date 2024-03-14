@@ -26,12 +26,18 @@ const albums5 = [
   "418720487",
 ];
 
-const apiAlbum =
-  "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
-const apiPrincipale =
-  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAuthor =
   "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/artist/";
+const apiPrincipale =
+    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+const apiAlbum =
+    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
+const options = {
+    headers: {
+        'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
+        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+    }
+}
 const proxy = "https://corsproxy.io/?";
 // navbar cards
 
@@ -47,7 +53,7 @@ let albumsObjects5 = [];
 async function loadNavbarCards() {
   try {
     for (let i = 0; i < albums5.length; i++) {
-      const response = await fetch(apiAlbum + albums5[i]);
+      const response = await fetch(apiAlbum + albums5[i], options);
       const itemProva = await response.json();
       albumsObjects5.push(itemProva);
     }
@@ -184,24 +190,13 @@ let tracksList = [];
 let tracksDetails = [];
 const loadArtistDetails = async () => {
   try {
-    const response = await fetch(apiPrincipale + nameArtist, {
-      headers: {
-        "X-RapidAPI-Key": "828e7fcfe3mshe4aae5ec5cd4aa8p194e34jsnce9825cd925e",
-        "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      },
-    });
+    const response = await fetch(apiPrincipale + nameArtist, options);
     artistDetails = await response.json();
 
     if (artistDetails.data.length > 0) {
       const idArtista = artistDetails.data[0].artist.id;
 
-      const fetchArtista = await fetch(apiAuthor + idArtista, {
-        headers: {
-          "X-RapidAPI-Key":
-            "828e7fcfe3mshe4aae5ec5cd4aa8p194e34jsnce9825cd925e",
-          "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-        },
-      });
+      const fetchArtista = await fetch(apiAuthor + idArtista, options);
       artistDetails = await fetchArtista.json();
       console.log(artistDetails);
 
