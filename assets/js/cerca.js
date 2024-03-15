@@ -27,7 +27,13 @@ const albums5 = [
 ];
 
 const apiAlbum =
-  "https://corsproxy.io/?https://striveschool-api.herokuapp.com/api/deezer/album/";
+  "https://deezerdevs-deezer.p.rapidapi.com/album/";
+  const options = {
+    headers: {
+      'X-RapidAPI-Key': '0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c',
+      'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+    }
+  }
 
 const inputCerca = document.getElementById("inputCerca");
 
@@ -52,7 +58,7 @@ let albumsObjects5 = [];
 async function loadNavbarCards() {
   try {
     for (let i = 0; i < albums5.length; i++) {
-      const response = await fetch(apiAlbum + albums5[i]);
+      const response = await fetch(apiAlbum + albums5[i], options);
       const itemProva = await response.json();
       albumsObjects5.push(itemProva);
     }

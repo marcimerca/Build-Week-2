@@ -61,15 +61,15 @@ const albums5 = [
 ];
 
 const apiPrincipale =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+    "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
-const apiBaseURL = "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
+    "https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiBaseURL = "https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
     headers: {
-        'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
+        'X-RapidAPI-Key': '0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c',
         'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-    }
+      }
 }
 
 let item;
@@ -147,28 +147,32 @@ function gotoAlbumPage(id) {
 function playAlbum(album, numero) {
     const trackUrl = album.tracks.data[0].preview;
     if (trackUrl) {
-      playAudio(trackUrl, numero);
-       // Ottieni le informazioni della traccia
-       const trackImage = album.cover_xl;
-       const trackTitle = album.title;
-       const trackArtist = album.artist.name;
+        // Riproduci la traccia
+        playAudio(trackUrl, numero);
+
+        // Estrai le informazioni della traccia
+        const trackImage = album.cover_xl;
+        const trackTitle = album.title;
+        const trackArtist = album.artist.name;
   
-       // Aggiorna il contenuto del div "songInfo" con le informazioni della traccia
-       const songInfoDiv = document.getElementById("songInfo");
-       songInfoDiv.innerHTML = ` <div class="image-container">
-       <img src="${trackImage}" alt="Track Image">
-     </div>
-     <div class="song-description">
-       <p class="title">${trackTitle}</p>
-       <p class="artist">${trackArtist}</p>
-     </div>
-     <div class="icons">
-                      <i class="fs-4 linkhover bi bi-heart"></i>
-                  </div>`;
+        // Aggiorna il contenuto del div "songInfo" con le informazioni della traccia
+        const songInfoDiv = document.getElementById("songInfo");
+        songInfoDiv.innerHTML = ` 
+            <div class="image-container">
+                <img src="${trackImage}" alt="Track Image">
+            </div>
+            <div class="song-description">
+                <p class="title">${trackTitle}</p>
+                <p class="artist">${trackArtist}</p>
+            </div>
+            <div class="icons">
+                <i class="fs-4 linkhover bi bi-heart"></i>
+            </div>`;
     } else {
-      console.error("Track preview not available");
+        console.error("Track preview not available");
     }
-  }
+}
+
 
 async function searchDeezer() {
     const query = document.getElementById("search-input").value;
@@ -221,9 +225,9 @@ function playAudio(trackUrl, numero) {
 
     // Crea un nuovo player audio
     const audioPlayer = new Audio(trackUrl);
-    audioPlayer.play(); // Avvia la nuova traccia audio
+    
     currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
-
+togglePlay();
     updateProgress();
 }
 // Funzione per aggiornare la barra di avanzamento
@@ -362,12 +366,12 @@ async function loadMiniCards() {
 function displayMiniCard() {
     albumsObjects4.forEach((albumsObject) => {
         const divCard = document.createElement("div");
-        divCard.classList.add("col-3");
+        divCard.classList.add("col-6", "col-xxl-3");
         divCard.innerHTML = `
   <div class="d-flex flex-row cardhover p-0 position-relative">
     <div class="d-flex align-items-center ">
       <img width="47" src="${albumsObject.cover_xl}" alt="img" />
-      <button class="btnPlay position-absolute end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
+      <button class="btnPlay btn-sm btn-lg position-absolute end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
       <div class="ms-3 d-flex flex-column text-white">
         <p class="mb-0">${albumsObject.title}</p>
       </div>
@@ -419,19 +423,3 @@ function displayNavbarCard() {
     });
 }
 
-
-
-// <div class="d-flex flex-row ms-3 my-3">
-//   <div class="d-flex align-items-center">
-//     <img
-//       width="47"
-//       class="rounded-5"
-//       src="assets/imgs/main/image-16.jpg"
-//       alt="img"
-//     />
-//   </div>
-//   <div class="ms-3 d-flex flex-column text-white">
-//     <p class="mb-0">50 cent</p>
-//     <p class="mb-0">Artista</p>
-//   </div>
-// </div>;
