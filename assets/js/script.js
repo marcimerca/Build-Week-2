@@ -67,9 +67,9 @@ const apiAlbum =
 const apiBaseURL = "https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
     headers: {
-        'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
+        'X-RapidAPI-Key': '0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c',
         'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-    }
+      }
 }
 
 let item;
