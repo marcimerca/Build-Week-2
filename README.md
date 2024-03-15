@@ -13,7 +13,7 @@ Il progetto prevede di ricreare diverse pagine dell'applicazione Spotify. Tutte 
 
 #### Elementi comuni
 
-_In ogni pagina è presente una Navbar laterale, popolata dinamicamente tramite API, che porta ai rispettivi artisti e/o album. Vi è presente una seconda Navbar, statica, che si ripete per tutte e quattro le pagine. Presente un footer che si ripresenta in tutte le pagine. C'è anche un Player Audio presente in tutte le pagine.
+In ogni pagina è presente una Navbar laterale, popolata dinamicamente tramite API, che porta ai rispettivi artisti e/o album. Vi è presente una seconda Navbar, statica, che si ripete per tutte e quattro le pagine. Presente un footer che si ripresenta in tutte le pagine. C'è anche un Player Audio presente in tutte le pagine.
 Responsività: L'applicazione è progettata per adattarsi a diverse dimensioni di schermo, consentendo un'esperienza utente ottimale su dispositivi desktop e mobile.
 
 #### Tecnologie utilizzate
