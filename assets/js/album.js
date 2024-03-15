@@ -171,24 +171,27 @@ async function loadNavbarCards() {
 
 function displayNavbarCard() {
   albumsObjects5.forEach((albumsObject) => {
-    const divNavbarCard = document.createElement("div");
-    divNavbarCard.classList.add("d-flex", "flex-row", "ms-3", "my-3");
-    divNavbarCard.innerHTML = `
-  <div class="d-flex align-items-center">
-    <img
-      width="47"
-      class="rounded-5"
-      src="${albumsObject.cover_xl}"
-      alt="img" 
-    />
-  </div>
-  <div class="ms-3 d-flex flex-column text-white">
-    <p class="mb-0 text-white">${albumsObject.title}</p>
-    <p class="mb-0 text-white">${albumsObject.artist.name}</p>
-  </div>
+      const divNavbarCard = document.createElement("div");
+      divNavbarCard.classList.add("d-flex", "flex-row", "rounded-2", "justify-content-center", "p-2", "justify-content-lg-start", "ms-3", "my-3", "linkhover", "cardhover");
+      divNavbarCard.innerHTML = `
+<div class="d-flex  align-items-center">
+  <img
+    width="47"
+    class="rounded-5"
+    src="${albumsObject.cover_xl}"
+    alt="img" 
+  />
+</div>
+<div class="ms-3 d-none d-lg-flex  flex-column text-white">
+  <p class="mb-0 text-white">${albumsObject.title}</p>
+  <p class="mb-0 text-white">${albumsObject.artist.name}</p>
+</div>
 `;
+divNavbarCard.addEventListener("click", function(){
+gotoAlbumPage(albumsObject.id);
+})
 
-    divNavbarCards.appendChild(divNavbarCard);
+      divNavbarCards.appendChild(divNavbarCard);
   });
 }
 
