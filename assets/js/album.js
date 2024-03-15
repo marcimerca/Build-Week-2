@@ -40,16 +40,17 @@ let albumsObjects5 = [];
 let currentAudioPlayer;
 let currentAlbumIndex = 0;
 const apiPrincipale =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
-const apiBaseURL = "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
+  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiBaseURL =
+  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
-    headers: {
-        'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
-        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-    }
-}
+  headers: {
+    "X-RapidAPI-Key": "cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704",
+    "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+  },
+};
 
 let item;
 window.addEventListener("load", init);
@@ -105,9 +106,9 @@ function playAudio(trackUrl) {
 
   // Crea un nuovo player audio
   const audioPlayer = new Audio(trackUrl);
-  audioPlayer.play(); // Avvia la nuova traccia audio
-  currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
 
+  currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
+  togglePlay();
   updateProgress();
 }
 // Funzione per aggiornare la barra di avanzamento
@@ -154,7 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 async function loadNavbarCards() {
   try {
     for (let i = 0; i < albums5.length; i++) {
@@ -192,7 +192,33 @@ function displayNavbarCard() {
   });
 }
 
-const loadDetailsAlbum = async () => {
+function playTrack(track) {
+  const trackUrl = track.preview;
+  if (trackUrl) {
+    playAudio(trackUrl);
+
+    const trackImage = track.album.cover_xl;
+    const trackTitle = track.title;
+    const trackArtist = track.artist.name;
+
+    const songInfoDiv = document.getElementById("songInfo");
+    songInfoDiv.innerHTML = `
+      <div class="image-container">
+        <img src="${trackImage}" alt="Track Image">
+      </div>
+      <div class="song-description">
+        <p class="title">${trackTitle}</p>
+        <p class="artist">${trackArtist}</p>
+      </div>
+      <div class="icons">
+        <i class="fs-4 linkhover bi bi-heart"></i>
+      </div>`;
+  } else {
+    console.error("Track preview not available");
+  }
+}
+
+async function loadDetailsAlbum() {
   try {
     const response = await fetch(apiAlbum + id, options);
     albumDetails = await response.json();
@@ -203,96 +229,61 @@ const loadDetailsAlbum = async () => {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 function displayAlbumDetails() {
   posterContainer.innerHTML = `
-        <div id="coverTestata" class="col-2 px-0">
-            <div>
-                <img src="${albumDetails.cover_xl
-    }" class="img-fluid rounded-1" alt="">
-            </div>
+    <div id="coverTestata" class="col-2 px-0">
+      <div>
+        <img src="${albumDetails.cover_xl}" class="img-fluid rounded-1" alt="">
+      </div>
+    </div>
+    <div id="contenitoreTesto" class="col-9 text-white">
+      <div class="d-flex flex-column">
+        <p class="m-0">Album</p>
+        <h1 class="m-0 display-1 fw-bold">${albumDetails.title}</h1>
+        <div class="d-flex flex-row align-items-center gap-1">
+          <img src="${
+            albumDetails.artist.picture
+          }" style="width: 20px;" alt="" class="rounded-5">
+          <p class="m-0">${
+            albumDetails.artist.name
+          } • ${albumDetails.release_date.slice(0, 4)} • ${
+    albumDetails.nb_tracks
+  } brani, ${converti(albumDetails.duration)}</p>
         </div>
-        <div id="contenitoreTesto" class="col-9 text-white">
-            <div class="d-flex flex-column">
-                <p class="m-0">Album</p>
-                <h1 class="m-0 display-1 fw-bold">${albumDetails.title}</h1>
-                <div class="d-flex flex-row align-items-center gap-1">
-                    <img src="${albumDetails.artist.picture
-    }" style="width: 20px;" alt="" class="rounded-5">
-                    <p class="m-0">${albumDetails.artist.name
-    } • ${albumDetails.release_date.slice(0, 4)} • ${albumDetails.nb_tracks
-    } brani, ${converti(albumDetails.duration)}
-</p>
-                </div>
-            </div>
-        </div>
-    `;
+      </div>
+    </div>
+  `;
 
   tracksList.forEach((track, index) => {
     const singleTrackContainer = document.createElement("div");
     singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
-    singleTrackContainer.innerHTML = `<div
-                    class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
-                    <div class="d-flex flex-row gap-4 align-items-center">
-                      <div style="width:20px">${index + 1}</div>
-                      <div class="d-flex flex-column align-items-start">
-                      <p class="m-0" id="track-${index+1}">${track.title}</p>
-                      <p class="m-0">${albumDetails.artist.name}</p>
-                      </div>
-                    </div>
-                    <div class="d-flex gap-3 me-2 align-items-center">
-                      <div><i class="bi bi-heart"></i></div>
-                      <div>${converti(track.duration)}</div>
-                      <div><i class="bi bi-three-dots"></i></div>
-                    </div>
-                  </div>`;
+    singleTrackContainer.innerHTML = `<div class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
+      <div class="d-flex flex-row gap-4 align-items-center">
+        <div style="width:20px">${index + 1}</div>
+        <div class="d-flex flex-column align-items-start">
+          <p class="m-0" id="track-${index + 1}">${track.title}</p>
+          <p class="m-0">${albumDetails.artist.name}</p>
+        </div>
+      </div>
+      <div class="d-flex gap-3 me-2 align-items-center">
+        <div><i class="bi bi-heart"></i></div>
+        <div>${converti(track.duration)}</div>
+        <div><i class="bi bi-three-dots"></i></div>
+      </div>
+    </div>`;
     contenitoreTracks.appendChild(singleTrackContainer);
-    const trackPlayer = document.getElementById('track-'+(index+1))
+    const trackPlayer = document.getElementById("track-" + (index + 1));
     trackPlayer.addEventListener("click", () => {
-      playAlbum(track.preview)
-      currentAlbumIndex = index
+      playTrack(track);
+      currentAlbumIndex = index;
     });
   });
   finalDetails.innerHTML = `<p class="m-0">${convertiData(
     albumDetails.release_date
   )}</p>
-              <p class="m-0">&copy;${albumDetails.label} </p>`;
-}
-
-function playSong(album, numero) {
-  const trackUrl = album.tracks.data[0].preview;
-  if (trackUrl) {
-    playAudio(trackUrl, numero);
-     
-     const trackImage = album.cover_xl;
-     const trackTitle = album.title;
-     const trackArtist = album.artist.name;
-
-     
-     const songInfoDiv = document.getElementById("songInfo");
-     songInfoDiv.innerHTML = ` <div class="image-container">
-     <img src="${index + 1}" alt="Track Image">
-   </div>
-   <div class="song-description">
-     <p class="title">${track.title}</p>
-     <p class="artist">${albumDetails.artist.name}</p>
-   </div>
-   <div class="icons">
-                    <i class="fs-4 linkhover bi bi-heart"></i>
-                </div>`;
-  } else {
-    console.error("Track preview not available");
-  }
-}
-
-
-function playAlbum(preview) {
-  if (preview) {
-    playAudio(preview);
-  } else {
-    console.error("Track preview not available");
-  }
+    <p class="m-0">&copy;${albumDetails.label} </p>`;
 }
 
 function togglePlay() {
@@ -307,18 +298,16 @@ function togglePlay() {
   }
 }
 
-
 function nextSong() {
   currentAlbumIndex = (currentAlbumIndex + 1) % tracksList.length;
-  playAlbum(tracksList[currentAlbumIndex].preview);
+  playTrack(tracksList[currentAlbumIndex]);
 }
 
 function previousSong() {
   currentAlbumIndex =
     (currentAlbumIndex - 1 + tracksList.length) % tracksList.length;
-  playAlbum(tracksList[currentAlbumIndex].preview);
+  playTrack(tracksList[currentAlbumIndex]);
 }
-
 
 function converti(duration) {
   const minutes = Math.floor(duration / 60);
@@ -349,86 +338,3 @@ function convertiData(inputDate) {
 
   return formattedDate;
 }
-
-// {
-
-//             <div class="d-flex justify-content-between align-items-center">
-//               <div class="d-flex align-items-center gap-3">
-//                 <button class="btnPlay btn btn-lg btn-success rounded-5">
-//                   <i class="bi bi-play-fill"></i>
-//                 </button>
-//                 <i class="fs-4 linkhover bi bi-heart text-secondary"></i>
-//                 <button
-//                   class="btn bg-transparent text-white border-0 btn-secondary bi bi-three-dots"
-//                   type="button"
-//                   data-bs-toggle="dropdown"
-//                   aria-expanded="false"
-//                 ></button>
-//                 <ul class="dropdown-menu bg-dark">
-//                   <li>
-//                     <a class="text-white hoverDropdown dropdown-item" href="#"
-//                       >Recenti</a
-//                     >
-//                   </li>
-//                   <li>
-//                     <a class="text-white hoverDropdown dropdown-item" href="#"
-//                       >Aggiunti di recente</a
-//                     >
-//                   </li>
-//                   <li>
-//                     <a class="text-white hoverDropdown dropdown-item" href="#"
-//                       >Ordine alfabetico</a
-//                     >
-//                   </li>
-//                   <li>
-//                     <a class="text-white hoverDropdown dropdown-item" href="#"
-//                       >Autore</a
-//                     >
-//                   </li>
-//                 </ul>
-//               </div>
-//               <div class="text-white d-flex align-items-start gap-2">
-//                 <p class="m-0">Elenco</p>
-//                 <i class="bi bi-list-ul text-white"></i>
-//               </div>
-//             </div>
-//             <!--contenitore titolo -->
-//             <div>
-//               <div
-//                 class="text-white mb-3 d-flex align-items-center mt-4 justify-content-between border-bottom pb-2 ps-3 border-secondary"
-//               >
-//                 <div class="d-flex gap-3">
-//                   <p class="m-0">#</p>
-//                   <p class="m-0">Titolo</p>
-//                 </div>
-//                 <div>
-//                   <i class="bi bi-clock me-5"></i>
-//                 </div>
-//               </div>
-//               <!-- contenitore singola track -->
-//               <div class="d-flex flex-column text-white">
-//                 <div
-//                   class="d-flex flex-row ps-3 justify-content-between align-items-center comparsa rounded-1"
-//                 >
-//                   <div class="d-flex flex-row gap-4 align-items-center">
-//                     <div>1</div>
-//                     <div class="d-flex flex-column">
-//                       <p class="m-0">Coro</p>
-//                       <p class="m-0">Calcutta</p>
-//                     </div>
-//                   </div>
-
-//                   <div class="d-flex gap-3 me-2">
-//                     <div><i class="bi bi-heart"></i></div>
-//                     <div>2:27</div>
-//                     <div><i class="bi bi-three-dots"></i></div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//             <div class="text-white mt-4 fs-7">
-//               <p class="m-0">20 ottobre 2023</p>
-//               <p class="m-0">&copy; 2023 Bomba Dischi</p>
-//             </div>
-
-// }

@@ -147,28 +147,32 @@ function gotoAlbumPage(id) {
 function playAlbum(album, numero) {
     const trackUrl = album.tracks.data[0].preview;
     if (trackUrl) {
-      playAudio(trackUrl, numero);
-       // Ottieni le informazioni della traccia
-       const trackImage = album.cover_xl;
-       const trackTitle = album.title;
-       const trackArtist = album.artist.name;
+        // Riproduci la traccia
+        playAudio(trackUrl, numero);
+
+        // Estrai le informazioni della traccia
+        const trackImage = album.cover_xl;
+        const trackTitle = album.title;
+        const trackArtist = album.artist.name;
   
-       // Aggiorna il contenuto del div "songInfo" con le informazioni della traccia
-       const songInfoDiv = document.getElementById("songInfo");
-       songInfoDiv.innerHTML = ` <div class="image-container">
-       <img src="${trackImage}" alt="Track Image">
-     </div>
-     <div class="song-description">
-       <p class="title">${trackTitle}</p>
-       <p class="artist">${trackArtist}</p>
-     </div>
-     <div class="icons">
-                      <i class="fs-4 linkhover bi bi-heart"></i>
-                  </div>`;
+        // Aggiorna il contenuto del div "songInfo" con le informazioni della traccia
+        const songInfoDiv = document.getElementById("songInfo");
+        songInfoDiv.innerHTML = ` 
+            <div class="image-container">
+                <img src="${trackImage}" alt="Track Image">
+            </div>
+            <div class="song-description">
+                <p class="title">${trackTitle}</p>
+                <p class="artist">${trackArtist}</p>
+            </div>
+            <div class="icons">
+                <i class="fs-4 linkhover bi bi-heart"></i>
+            </div>`;
     } else {
-      console.error("Track preview not available");
+        console.error("Track preview not available");
     }
-  }
+}
+
 
 async function searchDeezer() {
     const query = document.getElementById("search-input").value;
@@ -221,9 +225,9 @@ function playAudio(trackUrl, numero) {
 
     // Crea un nuovo player audio
     const audioPlayer = new Audio(trackUrl);
-    audioPlayer.play(); // Avvia la nuova traccia audio
+    
     currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
-
+togglePlay();
     updateProgress();
 }
 // Funzione per aggiornare la barra di avanzamento
@@ -419,19 +423,3 @@ function displayNavbarCard() {
     });
 }
 
-
-
-// <div class="d-flex flex-row ms-3 my-3">
-//   <div class="d-flex align-items-center">
-//     <img
-//       width="47"
-//       class="rounded-5"
-//       src="assets/imgs/main/image-16.jpg"
-//       alt="img"
-//     />
-//   </div>
-//   <div class="ms-3 d-flex flex-column text-white">
-//     <p class="mb-0">50 cent</p>
-//     <p class="mb-0">Artista</p>
-//   </div>
-// </div>;

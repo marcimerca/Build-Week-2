@@ -97,9 +97,9 @@ function playAudio(trackUrl) {
 
   // Crea un nuovo player audio
   const audioPlayer = new Audio(trackUrl);
-  audioPlayer.play(); // Avvia la nuova traccia audio
-  currentAudioPlayer = audioPlayer; // Memorizza il nuovo player audio come traccia attualmente in riproduzione
-
+  
+  currentAudioPlayer = audioPlayer; 
+togglePlay();
   updateProgress();
 }
 // Funzione per aggiornare la barra di avanzamento
@@ -329,88 +329,3 @@ function converti(duration) {
   }
 }
 
-{
-  /* <div class="container-fluid">
-  <div class="row">
-    <div class="col-3 me-3 rounded-2 p-3 h-100 cardhover">
-      <div
-        class="card position-relative bg-transparent border-0"
-        style="width: 12rem"
-      >
-        <img
-          onclick="gotoAlbumPage(${albumsObject.id})"
-          src="${albumsObject.cover_xl}"
-          class="card-img-top"
-          alt="..."
-        />
-        <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5">
-          <i class="bi bi-play-fill"></i>
-        </button>
-        <div class="card-body">
-          <h5 class="text-white">${albumsObject.title}</h5>
-          <p class="card-text text-white">${albumsObject.artist.name}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>; */
-}
-
-//ALBUM
-
-// const contenitoreAlbum = document.getElementById('container-album');
-
-// function displayAlbumsDetails() {
-//   const firstFiveTracks = tracksDetails.slice(0, 5);
-//   firstFiveTracks.forEach((track, index) => {
-//     const singleTrackContainer = document.createElement("div");
-//     singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
-//     singleTrackContainer.innerHTML = `<div
-//                     class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
-//                     <div class="d-flex flex-row gap-4 align-items-center">
-//                       <div style="width:20px">${index + 1}</div>
-//                       <div class="p-2"> <img class="rounded-1" style="width:50px;" src="${track.album.cover_small
-//       }"" > </div>
-//                       <div class="d-flex flex-column align-items-start">
-//                       <p class="m-0">${track.title}</p>
-//                       <p class="m-0">${track.artist.name}</p>
-//                       </div>
-//                     </div>
-//                     <div class="d-flex gap-3 me-2 align-items-center">
-//                       <div><i class="bi bi-heart"></i></div>
-//                       <div>${converti(track.duration)}</div>
-//                       <div><i class="bi bi-three-dots"></i></div>
-//                     </div>
-//                   </div>`;
-//     contenitoreAlbum.appendChild(singleTrackContainer);
-//   });
-// }
-
-// const arrayAlbums = tracksDetails.filter(album => {
-//   album.album
-// })
-
-// console.log(arrayAlbums)
-
-// function displayAlbumCard() {
-//   albumsObjectsArray.forEach((albumsObject) => {
-//     const cardDiv = document.createElement("div");
-//     cardDiv.innerHTML =
-//       `<div class="me-3 rounded-2 p-3 h-100 cardhover">
-//           <div class="card position-relative bg-transparent border-0" style="width: 12rem">
-//               <img onclick="gotoAlbumPage(${albumsObject.id})" src="${albumsObject.cover_xl}" class="card-img-top" alt="..." />
-//               <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
-//               <div class="card-body">
-//                   <h5 class="text-white">${albumsObject.title}</h5>
-//                   <p class="card-text text-white">
-//                       ${albumsObject.artist.name}
-//                   </p>
-//               </div>
-//           </div>
-//       </div>`;
-
-//     const btnPlay = cardDiv.querySelector(".btnPlay");
-//     btnPlay.addEventListener("click", () => playAlbum(albumsObject, numero));
-//     destinationDiv.appendChild(cardDiv);
-//   });
-// }
