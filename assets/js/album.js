@@ -39,17 +39,14 @@ let tracksList = [];
 let albumsObjects5 = [];
 let currentAudioPlayer;
 let currentAlbumIndex = 0;
-const apiPrincipale =
-  "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
-const apiAlbum =
-  "https://deezerdevs-deezer.p.rapidapi.com/album/";
-const apiBaseURL =
-  "https://deezerdevs-deezer.p.rapidapi.com/";
+const apiPrincipale = "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+const apiAlbum = "https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiBaseURL = "https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
   headers: {
-    'X-RapidAPI-Key': '0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c',
-    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-  }
+    "X-RapidAPI-Key": "0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c",
+    "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+  },
 };
 
 let item;
@@ -171,9 +168,20 @@ async function loadNavbarCards() {
 
 function displayNavbarCard() {
   albumsObjects5.forEach((albumsObject) => {
-      const divNavbarCard = document.createElement("div");
-      divNavbarCard.classList.add("d-flex", "flex-row", "rounded-2", "justify-content-center", "p-2", "justify-content-lg-start", "ms-3", "my-3", "linkhover", "cardhover");
-      divNavbarCard.innerHTML = `
+    const divNavbarCard = document.createElement("div");
+    divNavbarCard.classList.add(
+      "d-flex",
+      "flex-row",
+      "rounded-2",
+      "justify-content-center",
+      "p-2",
+      "justify-content-lg-start",
+      "ms-3",
+      "my-3",
+      "linkhover",
+      "cardhover"
+    );
+    divNavbarCard.innerHTML = `
 <div class="d-flex  align-items-center">
   <img
     width="47"
@@ -187,11 +195,11 @@ function displayNavbarCard() {
   <p class="mb-0 text-white">${albumsObject.artist.name}</p>
 </div>
 `;
-divNavbarCard.addEventListener("click", function(){
-gotoAlbumPage(albumsObject.id);
-})
+    divNavbarCard.addEventListener("click", function () {
+      gotoAlbumPage(albumsObject.id);
+    });
 
-      divNavbarCards.appendChild(divNavbarCard);
+    divNavbarCards.appendChild(divNavbarCard);
   });
 }
 
@@ -262,11 +270,13 @@ function displayAlbumDetails() {
   tracksList.forEach((track, index) => {
     const singleTrackContainer = document.createElement("div");
     singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
-    singleTrackContainer.innerHTML = `<div class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
+    singleTrackContainer.innerHTML = `<div id="track-${
+      index + 1
+    }" class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
       <div class="d-flex flex-row gap-4 align-items-center">
         <div style="width:20px">${index + 1}</div>
         <div class="d-flex flex-column align-items-start">
-          <p class="m-0" id="track-${index + 1}">${track.title}</p>
+          <p class="m-0" >${track.title}</p>
           <p class="m-0">${albumDetails.artist.name}</p>
         </div>
       </div>
