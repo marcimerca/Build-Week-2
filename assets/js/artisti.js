@@ -26,18 +26,15 @@ const albums5 = [
   "418720487",
 ];
 
-const apiAuthor =
-  "https://deezerdevs-deezer.p.rapidapi.com/artist/";
-const apiPrincipale =
-    "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
-const apiAlbum =
-    "https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiAuthor = "https://deezerdevs-deezer.p.rapidapi.com/artist/";
+const apiPrincipale = "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+const apiAlbum = "https://deezerdevs-deezer.p.rapidapi.com/album/";
 const options = {
   headers: {
-    'X-RapidAPI-Key': '0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c',
-    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-  }
-}
+    "X-RapidAPI-Key": "0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c",
+    "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+  },
+};
 const proxy = "https://corsproxy.io/?";
 // navbar cards
 
@@ -66,9 +63,20 @@ async function loadNavbarCards() {
 
 function displayNavbarCard() {
   albumsObjects5.forEach((albumsObject) => {
-      const divNavbarCard = document.createElement("div");
-      divNavbarCard.classList.add("d-flex", "flex-row", "rounded-2", "justify-content-center", "p-2", "justify-content-lg-start", "ms-3", "my-3", "linkhover", "cardhover");
-      divNavbarCard.innerHTML = `
+    const divNavbarCard = document.createElement("div");
+    divNavbarCard.classList.add(
+      "d-flex",
+      "flex-row",
+      "rounded-2",
+      "justify-content-center",
+      "p-2",
+      "justify-content-lg-start",
+      "ms-3",
+      "my-3",
+      "linkhover",
+      "cardhover"
+    );
+    divNavbarCard.innerHTML = `
 <div class="d-flex  align-items-center">
   <img
     width="47"
@@ -82,15 +90,42 @@ function displayNavbarCard() {
   <p class="mb-0 text-white">${albumsObject.artist.name}</p>
 </div>
 `;
-divNavbarCard.addEventListener("click", function(){
-gotoAlbumPage(albumsObject.id);
-})
+    divNavbarCard.addEventListener("click", function () {
+      gotoAlbumPage(albumsObject.id);
+    });
 
-      divNavbarCards.appendChild(divNavbarCard);
+    divNavbarCards.appendChild(divNavbarCard);
   });
 }
 
 let currentAudioPlayer;
+let currentAlbumIndex = 0;
+
+function playTrack(track) {
+  const trackUrl = track.preview;
+  if (trackUrl) {
+    playAudio(trackUrl);
+
+    const trackImage = track.album.cover_xl;
+    const trackTitle = track.title;
+    const trackArtist = track.artist.name;
+
+    const songInfoDiv = document.getElementById("songInfo");
+    songInfoDiv.innerHTML = `
+      <div class="image-container">
+        <img src="${trackImage}" alt="Track Image">
+      </div>
+      <div class="song-description">
+        <p class="title">${trackTitle}</p>
+        <p class="artist">${trackArtist}</p>
+      </div>
+      <div class="icons">
+        <i class="fs-4 linkhover bi bi-heart"></i>
+      </div>`;
+  } else {
+    console.error("Track preview not available");
+  }
+}
 
 // Funzione per riprodurre una traccia audio
 function playAudio(trackUrl) {
@@ -100,9 +135,9 @@ function playAudio(trackUrl) {
 
   // Crea un nuovo player audio
   const audioPlayer = new Audio(trackUrl);
-  
-  currentAudioPlayer = audioPlayer; 
-togglePlay();
+
+  currentAudioPlayer = audioPlayer;
+  togglePlay();
   updateProgress();
 }
 // Funzione per aggiornare la barra di avanzamento
@@ -137,8 +172,6 @@ function formatTime(time) {
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-let currentAlbumIndex = 0;
-
 // Funzione per riprodurre o mettere in pausa una traccia audio
 function togglePlay() {
   if (currentAudioPlayer.paused) {
@@ -152,17 +185,15 @@ function togglePlay() {
   }
 }
 
-// Funzione per passare alla canzone successiva
 function nextSong() {
-  currentAlbumIndex = (currentAlbumIndex + 1) % albumsObjects.length;
-  playAlbum(albumsObjects[currentAlbumIndex]);
+  currentAlbumIndex = (currentAlbumIndex + 1) % tracksList.length;
+  playTrack(tracksList[currentAlbumIndex]);
 }
 
-// Funzione per passare alla canzone precedente
 function previousSong() {
   currentAlbumIndex =
-    (currentAlbumIndex - 1 + albumsObjects.length) % albumsObjects.length;
-  playAlbum(albumsObjects[currentAlbumIndex]);
+    (currentAlbumIndex - 1 + tracksList.length) % tracksList.length;
+  playTrack(tracksList[currentAlbumIndex]);
 }
 
 // Aggiungi gestori di eventi per i pulsanti
@@ -242,7 +273,7 @@ function displayArtistDetails() {
   firstFiveTracks.forEach((track, index) => {
     const singleTrackContainer = document.createElement("div");
     singleTrackContainer.classList.add("d-flex", "flex-column", "text-white");
-    singleTrackContainer.innerHTML = `<div
+    singleTrackContainer.innerHTML = `<div id="track-${index + 1}"
                     class="d-flex flex-row ps-3 justify-content-between comparsa rounded-1 mb-3">
                     <div class="d-flex flex-row gap-4 align-items-center">
                       <div style="width:20px">${index + 1}</div>
@@ -261,6 +292,11 @@ function displayArtistDetails() {
                     </div>
                   </div>`;
     contenitoreTracks.appendChild(singleTrackContainer);
+    const trackPlayer = document.getElementById("track-" + (index + 1));
+    trackPlayer.addEventListener("click", () => {
+      playTrack(track);
+      currentAlbumIndex = index;
+    });
   });
   const arrayAlbumFiltrati = [];
   const idVisti = {};
@@ -331,4 +367,3 @@ function converti(duration) {
     }
   }
 }
-
