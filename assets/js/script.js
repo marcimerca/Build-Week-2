@@ -67,7 +67,7 @@ const apiAlbum =
 const apiBaseURL = "https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
     headers: {
-        'X-RapidAPI-Key': '0d20cbbe38msheee88100a300991p1c4ef5jsn7f7a10db4a3c',
+        'X-RapidAPI-Key': '5d20013f3dmshb856ab3131e0cd8p13fd7cjsnf802b5358836',
         'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
       }
 }
@@ -122,7 +122,7 @@ function displayAlbumCard(albumsObjectsArray, destinationDiv, numero) {
         const cardDiv = document.createElement("div");
         cardDiv.innerHTML = `<div class="me-3 rounded-2 p-3 h-100 cardhover">
             <div class="card position-relative bg-transparent border-0" style="width: 12rem">
-                <img onclick="gotoAlbumPage(${albumsObject.id})" src="${albumsObject.cover_xl}" class="card-img-top" alt="..." />
+                <img onclick="gotoAlbumPage(${albumsObject.id})" src="${albumsObject.cover_xl}" class="card-img-top linkhover" alt="..." />
                 <button class="btnPlay position-absolute top-0 end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
                 <div class="card-body">
                     <h5 class="text-white">${albumsObject.title}</h5>
@@ -403,9 +403,9 @@ async function loadNavbarCards() {
 function displayNavbarCard() {
     albumsObjects5.forEach((albumsObject) => {
         const divNavbarCard = document.createElement("div");
-        divNavbarCard.classList.add("d-flex", "flex-row", "ms-3", "my-3");
+        divNavbarCard.classList.add("d-flex", "flex-row", "rounded-2", "justify-content-center", "p-2", "justify-content-lg-start", "ms-3", "my-3", "linkhover", "cardhover");
         divNavbarCard.innerHTML = `
-  <div class="d-flex align-items-center">
+  <div class="d-flex  align-items-center">
     <img
       width="47"
       class="rounded-5"
@@ -413,11 +413,14 @@ function displayNavbarCard() {
       alt="img" 
     />
   </div>
-  <div class="ms-3 d-flex flex-column text-white">
+  <div class="ms-3 d-none d-lg-flex  flex-column text-white">
     <p class="mb-0 text-white">${albumsObject.title}</p>
     <p class="mb-0 text-white">${albumsObject.artist.name}</p>
   </div>
 `;
+divNavbarCard.addEventListener("click", function(){
+gotoAlbumPage(albumsObject.id);
+})
 
         divNavbarCards.appendChild(divNavbarCard);
     });
