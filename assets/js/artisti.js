@@ -27,11 +27,11 @@ const albums5 = [
 ];
 
 const apiAuthor =
-  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/artist/";
+  "https://deezerdevs-deezer.p.rapidapi.com/artist/";
 const apiPrincipale =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+    "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
+    "https://deezerdevs-deezer.p.rapidapi.com/album/";
 const options = {
     headers: {
         'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',

@@ -61,10 +61,10 @@ const albums5 = [
 ];
 
 const apiPrincipale =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+    "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-    "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
-const apiBaseURL = "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
+    "https://deezerdevs-deezer.p.rapidapi.com/album/";
+const apiBaseURL = "https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
     headers: {
         'X-RapidAPI-Key': 'cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704',
@@ -366,12 +366,12 @@ async function loadMiniCards() {
 function displayMiniCard() {
     albumsObjects4.forEach((albumsObject) => {
         const divCard = document.createElement("div");
-        divCard.classList.add("col-3");
+        divCard.classList.add("col-6", "col-xxl-3");
         divCard.innerHTML = `
   <div class="d-flex flex-row cardhover p-0 position-relative">
     <div class="d-flex align-items-center ">
       <img width="47" src="${albumsObject.cover_xl}" alt="img" />
-      <button class="btnPlay position-absolute end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
+      <button class="btnPlay btn-sm btn-lg position-absolute end-0 btn btn-success rounded-5"><i class="bi bi-play-fill"></i></button>
       <div class="ms-3 d-flex flex-column text-white">
         <p class="mb-0">${albumsObject.title}</p>
       </div>

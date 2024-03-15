@@ -40,11 +40,11 @@ let albumsObjects5 = [];
 let currentAudioPlayer;
 let currentAlbumIndex = 0;
 const apiPrincipale =
-  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/search?q=";
+  "https://deezerdevs-deezer.p.rapidapi.com/search?q=";
 const apiAlbum =
-  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/album/";
+  "https://deezerdevs-deezer.p.rapidapi.com/album/";
 const apiBaseURL =
-  "https://corsproxy.io/?https://deezerdevs-deezer.p.rapidapi.com/";
+  "https://deezerdevs-deezer.p.rapidapi.com/";
 const options = {
   headers: {
     "X-RapidAPI-Key": "cef0e57ce3msh8c305b0b5e67c6dp1a6821jsn1d296a447704",
