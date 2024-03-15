@@ -1,22 +1,22 @@
 # Build-Week-2
-Spotify Clone
+## Spotify Clone
 
 Il progetto prevede di ricreare diverse pagine dell'applicazione Spotify. Tutte le pagine dovranno avere un player funzionante e dovranno popolarsi andando a recuperare i dati dall'API.
 
 
-Struttura del progetto
+#### Struttura del progetto
 
 - Pagina Principale
 - Pagina Artisti
 - Pagina Cerca
 - Pagina Album
 
-Elementi comuni
+#### Elementi comuni
 
-In ogni pagina è presente una Navbar laterale, popolata dinamicamente tramite API, che porta ai rispettivi artisti e/o album. Vi è presente una seconda Navbar, statica, che si ripete per tutte e quattro le pagine. Presente un footer che si ripresenta in tutte le pagine. C'è anche un Player Audio presente in tutte le pagine.
+_In ogni pagina è presente una Navbar laterale, popolata dinamicamente tramite API, che porta ai rispettivi artisti e/o album. Vi è presente una seconda Navbar, statica, che si ripete per tutte e quattro le pagine. Presente un footer che si ripresenta in tutte le pagine. C'è anche un Player Audio presente in tutte le pagine.
 Responsività: L'applicazione è progettata per adattarsi a diverse dimensioni di schermo, consentendo un'esperienza utente ottimale su dispositivi desktop e mobile.
 
-Tecnologie utilizzate
+#### Tecnologie utilizzate
 
 - ### HTML
 - ### CSS
@@ -24,20 +24,21 @@ Tecnologie utilizzate
 - ### Bootstrap
 - ### API (L'API Deezer potrebbe subire modifiche o interruzioni nel tempo, il che potrebbe influenzare il funzionamento dell'applicazione.)
 
-1) Pagina Principale
+### 1) Pagina Principale
 Struttura della pagina
 
 Il contenuto principale della pagina viene diviso in due colonne:
-Colonna sinistra: Contiene una barra laterale verticale con opzioni di navigazione come "Home", "Cerca" e "La tua libreria".
-Colonna destra: Contiene il contenuto principale, inclusi i controlli per la riproduzione della musica e le sezioni per le playlist personalizzate e le canzoni più popolari.
+- Colonna sinistra: Contiene una barra laterale verticale con opzioni di navigazione come "Home", "Cerca" e "La tua libreria".
+- Colonna destra: Contiene il contenuto principale, inclusi i controlli per la riproduzione della musica e le sezioni per le playlist personalizzate e le canzoni più popolari.
+  
 Script JavaScript: Fornisce funzionalità dinamiche alla pagina, come la gestione degli eventi dei controlli di riproduzione della musica.
 
-Funzionalità Javascript
+#### Funzionalità Javascript
 
-Inizializzazione
+Inizializzazione: 
 L'evento load viene utilizzato per avviare l'inizializzazione dello script. Una volta caricata la pagina, vengono eseguite le funzioni init() per caricare gli album e le mini card, nonché la barra laterale con le card associate agli album.
 
-Variabili
+Variabili: 
 Il codice utilizza diverse variabili per memorizzare gli ID degli album, le informazioni sugli album caricati, nonché gli URL delle API di Deezer e le opzioni di richiesta per l'autenticazione.
 
 Sono presenti varie funzioni principali:
@@ -49,7 +50,7 @@ Sono presenti varie funzioni principali:
 
 Lo script utilizza le API di Deezer per caricare le informazioni sugli album e riprodurre le tracce audio associate.
 
-### 2)Pagina Cerca 
+### 2) Pagina Cerca 
 
 La pagina cerca serve a cercare direttamente l'artista che si vuole andare ad ascoltare. Se la ricerca andrà a buon fine apparirà a schermo la pagina del rispettivo artista con le varie canzoni più ascoltate.
 
@@ -125,6 +126,6 @@ Gli utenti possono visualizzare dettagli su un album specifico selezionato dalla
 Utilizza i pulsanti "avanti" e "indietro" per passare alla traccia successiva o precedente nell'album corrente.
 
 
-Regolazione del volume:
+- Regolazione del volume:
 Trascina il cursore del controllo del volume per aumentare o diminuire il volume dell'audio.
 
